@@ -1,0 +1,11 @@
+body{padding: 0; margin: 0;}
+.nav{
+    background: url("../images/main/jq-global-nav.png") repeat-x scroll 0px bottom rgb(27, 27, 27);
+    width: 100%;
+    height: 33px;
+    margin: 0;
+}
+.center{
+    margin: auto;
+    width: 1024px;
+}

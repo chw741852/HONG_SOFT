@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehchache>
+    <!-- 如果缓存中的对象储存超过指定的缓存数量的对象储存的磁盘地址 -->
+    <diskStore path="D:/ehcache" />
+
+    <!--
+    ● name:指定区域名
+    ● maxElementsInMemory ：缓存在内存中的最大数目
+    ● maxElementsOnDisk：缓存在磁盘上的最大数目
+    ● eternal ：设置是否永远不过期
+    ● overflowToDisk ： 硬盘溢出数目
+    ● timeToIdleSeconds ：对象处于空闲状态的最多秒数后销毁
+    ● timeToLiveSeconds ：对象处于缓存状态的最多秒数后销毁
+    ● memoryStoreEvictionPolicy:缓存算法，有LRU（默认）、LFU、LFU
+
+    关于缓存算法，常见有三种：
+    ● LRU：（Least Rencently Used）新来的对象替换掉使用时间算最近很少使用的对象
+    ● LFU：（Least Frequently Used）替换掉按命中率高低算比较低的对象
+    ● LFU：（First In First Out）把最早进入二级缓存的对象替换掉
+    -->
+
+    <!-- 默认cache：如果没有对应的特定区域的缓存，就使用默认缓存 -->
+    <defaultCache maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="300"
+            timeToLiveSeconds="600"
+            overflowToDisk="false">
+    </defaultCache>
+
+    <cache name="org.hibernate.cache.StandardQueryCache"
+           maxElementsInMemory="10000"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
+           overflowToDisk="true"
+    />
+    <!-- Sample cache named sampleCache2
+        This cache contains 1000 elements. Elements will always be held in memory.
+        They are not expired. -->
+    <cache name="org.hibernate.cache.UpdateTimestampsCache"
+           maxElementsInMemory="5000"
+           eternal="true"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+    />
+
+    <!-- 指定区域cache：通过name指定，name对应到Hibernate中的区域名即可-->
+    <!--<cache name="cn.javass.h3test.model.UserModel"-->
+           <!--eternal="false"-->
+           <!--maxElementsInMemory="100"-->
+           <!--timeToIdleSeconds="1200"-->
+           <!--timeToLiveSeconds="1200"-->
+           <!--overflowToDisk="false">-->
+    <!--</cache>-->
+</ehchache>

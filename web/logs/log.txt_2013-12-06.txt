@@ -1,0 +1,4 @@
+2013-12-06 16:55:09,225  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.spi.UpdateTimestampsCache]; using defaults.
+2013-12-06 16:55:09,236  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.internal.StandardQueryCache]; using defaults.
+2013-12-06 16:55:09,665  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.module.domain.Module]; using defaults.
+2013-12-06 16:55:09,683  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.query.domain.SysQueryTables]; using defaults.

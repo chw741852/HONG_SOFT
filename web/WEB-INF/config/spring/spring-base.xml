@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:component-scan base-package="com.hong">
+        <context:include-filter type="regex" expression="..*.dao.impl.*"/>
+        <context:include-filter type="regex" expression="..*.service.impl.*"/>
+        <context:include-filter type="regex" expression="..*.domain.*"/>
+    </context:component-scan>
+
+    <bean id="propertyConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>/WEB-INF/config/database/database.properties</value>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver_class}" />
+        <property name="jdbcUrl" value="${jdbc.url}" />
+        <property name="user" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="minPoolSize" value="${jdbc.min_pool_size}" />
+        <property name="maxPoolSize" value="${jdbc.max_pool_size}" />
+        <property name="initialPoolSize" value="${jdbc.init_pool_size}" />
+        <property name="maxIdleTime" value="${jdbc.max_idle_time}" />
+
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+        <property name="acquireIncrement" value="${jdbc.acquire_increment}" />
+
+        <!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
+        <property name="acquireRetryAttempts" value="${jdbc.acquire_retry_attempts}" />
+
+        <!--两次连接中间隔时间，单位毫秒。Default: 1000 -->
+        <property name="acquireRetryDelay" value="${jdbc.acquire_retry_delay}" />
+
+        <!--如果设为true那么在取得连接的同时将校验连接的有效性。Default: false -->
+        <property name="testConnectionOnCheckin" value="${jdbc.test_connenction_on_checkin}" />
+
+        <!--c3p0将建一张名为C3P0_TEST_TABLE的空表，并使用其自带的查询语句进行测试。Default: null-->
+        <property name="automaticTestTable" value="${jdbc.automatic_test_table}" />
+
+        <!--每18000秒检查所有连接池中的空闲连接。Default: 0 -->
+        <property name="idleConnectionTestPeriod" value="${jdbc.idle_connection_test_period}" />
+
+        <!--当连接池用完时客户端调用getConnection()后等待获取新连接的时间，超时后将抛出
+              SQLException,如设为0则无限期等待。单位毫秒。Default: 0 -->
+        <property name="checkoutTimeout" value="${jdbc.checkout_timeout}" />
+        <property name="autoCommitOnClose" value="true"/>
+    </bean>
+
+    <!-- JPA Entity Manager Factory without persistence.xml -->
+    <bean name="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="packagesToScan" value="com.hong.**.domain" />
+        <!-- 指定数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 指定JPA的配置文件 -->
+        <!--<property name="persistenceXmlLocation" value="classpath:persistence.xml"/>-->
+        <!-- 指定持久化单元名称 -->
+        <!--<property name="persistenceUnitName" value="hongSoft"/>-->
+        <!-- 指定JPA持久化提供商 -->
+        <property name="persistenceProvider" ref="hibernatePersistence"/>
+        <!-- 用于设置实现厂商JPA实现的特定属性 -->
+        <property name="jpaVendorAdapter" ref="hibernateVendor" />
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.SQLServer2005Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.jdbc.fetch_size">100</prop>
+                <prop key="hibernate.jdbc.batch_size">50</prop>
+                <!-- ehcache 二级缓存 -->
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+                <prop key="hibernate.cache.provider_configuration_file_resource_path">/ehcache.xml</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="hibernatePersistence" class="org.hibernate.ejb.HibernatePersistence"/>
+    <bean id="hibernateVendor" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="database" value="SQL_SERVER"/>
+        <property name="showSql" value="true"/>
+        <property name="generateDdl" value="false"/>
+    </bean>
+
+    <!-- 配置事务管理 -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>
