@@ -1,5 +1,5 @@
 This file was created by IntelliJ IDEA 12.1.6 for binding GitHub repository
 开发环境：JDK1.7，TOMCAT7，SQL SERVER 2005
 
-现在他只是一个用springMVC + spring3.x + JPA + hibernate4.x搭建的一个框架，
+现在他只是一个用springMVC + spring3.x + JPA + hibernate4.x搭建的一个框架，页面是用freemarker做的。
 运行之后你可以看见一个用easyui做的界面，并且有一个例子。
