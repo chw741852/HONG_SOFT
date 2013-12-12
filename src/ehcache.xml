@@ -27,7 +27,7 @@
             overflowToDisk="false">
     </defaultCache>
 
-    <cache name="org.hibernate.cache.StandardQueryCache"
+    <cache name="org.hibernate.cache.internal.StandardQueryCache"
            maxElementsInMemory="10000"
            eternal="false"
            timeToIdleSeconds="300"
@@ -37,7 +37,7 @@
     <!-- Sample cache named sampleCache2
         This cache contains 1000 elements. Elements will always be held in memory.
         They are not expired. -->
-    <cache name="org.hibernate.cache.UpdateTimestampsCache"
+    <cache name="org.hibernate.cache.spi.UpdateTimestampsCache"
            maxElementsInMemory="5000"
            eternal="true"
            timeToIdleSeconds="0"
