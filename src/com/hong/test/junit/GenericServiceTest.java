@@ -1,7 +1,7 @@
 package com.hong.test.junit;
 
 import com.hong.core.generic.service.IGenericService;
-import com.hong.core.query.domain.SysQueryTables;
+//import com.hong.core.query.domain.SysQueryTables;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +25,12 @@ public class GenericServiceTest {
     @Autowired
     private IGenericService genericService;
 
-    @Test
-    public void testSave() {
-        SysQueryTables obj = new SysQueryTables();
-        obj.setTableName("SYS_QUERY_TABLES");
-        obj.setTableLabel("queryTable");
-        genericService.saveObject(obj);
-        System.out.print(obj.getId());
-    }
+//    @Test
+//    public void testSave() {
+//        SysQueryTables obj = new SysQueryTables();
+//        obj.setTableName("SYS_QUERY_TABLES");
+//        obj.setTableLabel("queryTable");
+//        genericService.saveObject(obj);
+//        System.out.print(obj.getId());
+//    }
 }
