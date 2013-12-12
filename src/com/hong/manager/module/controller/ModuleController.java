@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.hong.core.generic.service.IGenericService;
 import com.hong.manager.module.domain.Module;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,8 @@ import java.util.Map;
 
 @Controller
 public class ModuleController {
+//    private static final Logger logger = Logger.getLogger(ModuleController.class);
+
     @Autowired
     private IGenericService genericService;
 

@@ -65,7 +65,8 @@ public class GenericDaoImpl implements IGenericDao {
                 count = rs.getInt(1);
             }
         } catch (Exception e) {
-            log.error(sql);
+            log.error("error execute: " + sql);
+            log.error(e.getMessage());
             e.printStackTrace();
         } finally {
             try {
@@ -334,7 +335,7 @@ public class GenericDaoImpl implements IGenericDao {
             getEntityManager().flush();
             result = true;
         } catch (Exception e) {
-            log.error("batchExecuteHql: " + hql);
+            log.error("error execute: " + hql);
             log.error(e.getMessage());
             e.printStackTrace();
         }
@@ -354,7 +355,7 @@ public class GenericDaoImpl implements IGenericDao {
             }
             result = true;
         } catch (Exception e) {
-            log.error("deleteObject: " + sql);
+            log.error("error execute: " + sql);
             log.error(e.getMessage());
             e.printStackTrace();
         }
@@ -489,7 +490,8 @@ public class GenericDaoImpl implements IGenericDao {
             }
         } catch (Exception e) {
             getEntityManager().close();
-            log.error("executeReportSql: " + sql);
+            log.error("error execute: " + sql);
+            log.error(e.getMessage());
             e.printStackTrace();
         } finally {
             try {
@@ -546,7 +548,8 @@ public class GenericDaoImpl implements IGenericDao {
                 }
             }
         } catch (Exception e) {
-            log.error(sql);
+            log.error("error execute: " + sql);
+            log.error(e.getMessage());
             e.printStackTrace();
         } finally {
             try {

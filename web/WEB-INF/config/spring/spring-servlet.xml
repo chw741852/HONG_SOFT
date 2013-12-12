@@ -3,18 +3,27 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 设置注解类所在包 -->
     <context:component-scan base-package="com.hong.**.controller"/>
 
     <!-- 默认注解映射支持 -->
     <mvc:annotation-driven/>
+
+    <!-- 开启基于@Aspect切面的注解处理器。 -->
+    <!-- 如果配置在spring-base.xml中AOP将不起作用，不知是否是拦截Controller的原因 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!-- 日志切面 -->
+    <bean id="logAspectJ" class="com.hong.core.log.LogAspectJ"/>
 
     <!-- freemarker配置 -->
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">

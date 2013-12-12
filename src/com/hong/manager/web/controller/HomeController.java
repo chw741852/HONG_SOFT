@@ -1,8 +1,17 @@
 package com.hong.manager.web.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.hong.core.generic.service.IGenericService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,8 +22,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller("managerHomeController")
 public class HomeController {
+    @Autowired
+    private IGenericService genericService;
+
     @RequestMapping(value = "/manager/home", method = RequestMethod.GET)
     public String home() {
         return "/manager/home";
+    }
+
+    @RequestMapping(value = "/manager/home/loadZTreeNodes", method = RequestMethod.GET)
+    public void loadZTreeNodes(HttpServletRequest request, HttpServletResponse response) {
+        response.setContentType("text/html;charset=UTF-8");
+
+        String sql = "select id, isnull(parentId,0) pId, name, actionUrl action" +
+                " from sys_module order by sequence, id asc";
+        List<Map> result = genericService.executeSqlToRecordMap(sql);
+
+        try {
+            response.getWriter().write(JSON.toJSONString(result));
+            response.getWriter().flush();
+            response.getWriter().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

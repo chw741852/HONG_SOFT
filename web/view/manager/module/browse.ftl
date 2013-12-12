@@ -233,7 +233,7 @@
         $.fn.zTree.init($("#moduleTree"), setting, zNodes);
         $(window).resize(function() {
             $("#dg").datagrid('resize');
-        })
+        });
     });
 </script>
 

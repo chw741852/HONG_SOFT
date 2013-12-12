@@ -23,7 +23,7 @@
 
 <div data-options="region:'west', split:true, title:'导行面板'" style="width: 220px; padding: 0; overflow: hidden;">
     <div class="easyui-accordion" data-options="fit: true, border: false">
-        <div title="系统管理" style="padding: 10px;" id="sysTree" class="ztree">
+        <div title="功能模块" style="padding: 10px;" id="sysTree" class="ztree">
 
         </div>
     </div>
@@ -35,6 +35,7 @@
     </div>
 </div>
 
+<#-- TODO 此处未用上，后期需要处理 -->
 <div id="mm" class="easyui-menu" style="width: 150px; display: none">
     <div id="mm-tabclose">关闭标签</div>
     <div id="mm-tabcloseall">全部关闭</div>
