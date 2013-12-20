@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://www.springframework.org/schema/security"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <beans:description>Spring Security 安全配置</beans:description>
+
+    <http pattern="/css/**" security="none"/>
+    <http pattern="/images/**" security="none"/>
+    <http pattern="/js/**" security="none"/>
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/login" access="permitAll"/>
+        <form-login login-page="/login" username-parameter="username" password-parameter="password"
+                    authentication-failure-url="/login?error" default-target-url="/manager/home"/>
+        <logout logout-url="/logout" logout-success-url="/login?logout"/>
+
+        <!-- 当一个账号重复登录时，则第一个登录的用户session过期，跳转的登录页面 -->
+        <session-management invalid-session-url="/sessionTimeout">
+            <concurrency-control max-sessions="1" expired-url="/login?expired"/>
+        </session-management>
+
+        <!-- 当用户权限不够时，跳转到指定URL -->
+        <access-denied-handler error-page="/accessDenied"/>
+
+        <custom-filter ref="filterSupport" before="FILTER_SECURITY_INTERCEPTOR"/>
+    </http>
+
+    <!-- 过滤器 -->
+    <beans:bean id="filterSupport" class="com.hong.core.security.support.FilterSecurityInterceptorSupport">
+        <!-- 用户的权限 -->
+        <beans:property name="authenticationManager" ref="authenticationManagerSupport"/>
+        <!-- 用户是否拥有所请求资源的权限 -->
+        <beans:property name="accessDecisionManager" ref="accessDecisionManagerSupport"/>
+        <!-- 资源与权限的对应关系 -->
+        <beans:property name="securityMetadataSource" ref="securityMetadataSourceSupport"/>
+    </beans:bean>
+
+    <!-- 验证配置，认真管理器，实现用户认证入口，主要实现UserDetailsService接口即可 -->
+    <authentication-manager alias="authenticationManagerSupport">
+        <authentication-provider user-service-ref="userDetailsService">
+            <password-encoder ref="passwordEncoding"/>
+        </authentication-provider>
+    </authentication-manager>
+    <beans:bean id="passwordEncoding"
+                class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
+
+    <!-- 用户查询服务，将用户信息查询出来 -->
+    <beans:bean id="userDetailsService" class="com.hong.core.security.support.UserDetailsServiceSupport">
+        <beans:property name="genericService" ref="genericService"/>
+    </beans:bean>
+
+    <!-- 访问决策器，决定角色是否有足够权限访问某个资源 -->
+    <beans:bean id="accessDecisionManagerSupport" class="com.hong.core.security.support.AccessDecisionManagerSupport"/>
+
+    <!-- 资源元数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色访问 -->
+    <beans:bean id="securityMetadataSourceSupport" class="com.hong.core.security.support.InvocationSecurityMetadataSourceSupport">
+        <beans:constructor-arg ref="genericService"/>
+    </beans:bean>
+</beans:beans>

@@ -1,6 +1,7 @@
 package com.hong.core.generic.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,11 +13,12 @@ import java.util.Date;
  */
 
 @MappedSuperclass
-public class IdEntity {
+public class IdEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
-
+    @Version
+    private Long version;
     private Date createdTime;
     @Column(length = 50)
     private String createdBy;
@@ -37,6 +39,14 @@ public class IdEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public Date getCreatedTime() {

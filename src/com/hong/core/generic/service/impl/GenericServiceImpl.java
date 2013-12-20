@@ -36,22 +36,22 @@ public class GenericServiceImpl implements IGenericService {
     }
 
     @Override
-    public List executeSql(String sql, int position, int length) {
+    public List<String[]> executeSql(String sql, int position, int length) {
         return genericDao.executeSql(sql, position, length);
     }
 
     @Override
-    public List executeSql(String sql, int position, int length, Map fieldsMap) {
+    public List<String[]> executeSql(String sql, int position, int length, Map fieldsMap) {
         return genericDao.executeSql(sql, position, length, fieldsMap);
     }
 
     @Override
-    public List executeSql(String sql, Map fieldsMap) {
+    public List<String[]> executeSql(String sql, Map fieldsMap) {
         return genericDao.executeSql(sql, fieldsMap);
     }
 
     @Override
-    public List executeSql(String sql) {
+    public List<String[]> executeSql(String sql) {
         return genericDao.executeSql(sql);
     }
 

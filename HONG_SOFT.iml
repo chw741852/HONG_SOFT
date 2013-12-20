@@ -21,8 +21,9 @@
         <datasource-mapping>
           <factory-entry name="&lt;anonymous&gt;spring-base.xml@3054" value="dataSource" />
           <factory-entry name="&lt;anonymous&gt;spring-base.xml@3057" value="dataSource" />
+          <factory-entry name="&lt;anonymous&gt;spring-base.xml@3062" value="f7a84e6f-cc0d-4045-8897-5e8e020e2ce7" />
           <factory-entry name="&lt;anonymous&gt;spring-base.xml@3880" value="f7a84e6f-cc0d-4045-8897-5e8e020e2ce7" />
-          <factory-entry name="hongSoft" />
+          <factory-entry name="hongSoft" value="f7a84e6f-cc0d-4045-8897-5e8e020e2ce7" />
           <factory-entry name="hong_soft" value="f7a84e6f-cc0d-4045-8897-5e8e020e2ce7" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/persistence.xml" />

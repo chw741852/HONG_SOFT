@@ -10,34 +10,13 @@
         <param-value>mmcroot</param-value>
     </context-param>
 
-    <!-- 中文乱码过滤器 -->
-    <filter>
-        <filter-name>encodingFilter</filter-name>
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>utf-8</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>encodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <!-- url美化，UrlRewriteFilter -->
-    <!--<filter>
-        <filter-name>urlRewriteFilter</filter-name>
-        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>urlRewriteFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>-->
-
     <!-- spring 配置文件 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/config/spring/spring-base.xml</param-value>
+        <param-value>
+            /WEB-INF/config/spring/spring-base.xml
+            /WEB-INF/config/spring/spring-security.xml
+        </param-value>
     </context-param>
 
     <!-- log4j 配置文件 -->
@@ -71,6 +50,16 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <!-- 配置spring security过滤器 -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!-- 开启hibernate4过滤器 -->
     <filter>
         <filter-name>hibernateFilter</filter-name>
@@ -90,8 +79,36 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!-- 中文乱码过滤器 -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- url美化，UrlRewriteFilter -->
+    <!--<filter>
+        <filter-name>urlRewriteFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>urlRewriteFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+
+    <!-- session超时定义为20分钟 -->
+    <session-config>
+        <session-timeout>20</session-timeout>
+    </session-config>
+
     <welcome-file-list>
-        <welcome-file>/manager/home</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

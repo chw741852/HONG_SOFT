@@ -150,8 +150,8 @@ public class GenericDaoImpl implements IGenericDao {
     }
 
     @Override
-    public List executeSql(final String sql, final int position, final int length) {
-        List lt = new ArrayList();
+    public List<String[]> executeSql(final String sql, final int position, final int length) {
+        List<String[]> lt = new ArrayList<String[]>();
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection connection = getConnection();
