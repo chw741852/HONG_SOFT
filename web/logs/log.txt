@@ -18,3 +18,14 @@
 2013-12-19 17:16:44,038  WARN [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.module.controller.ModuleController.ajaxFindModule 方法执行结束！
 2013-12-19 17:16:44,046  WARN [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.module.controller.ModuleController.loadChildNode 方法耗时21毫秒！
 2013-12-19 17:16:44,047  WARN [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.module.controller.ModuleController.loadChildNode 方法执行结束！
+2013-12-28 13:40:14,597  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.module.domain.Module]; using defaults.
+2013-12-28 13:40:14,634  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Resource]; using defaults.
+2013-12-28 13:40:14,648  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Role]; using defaults.
+2013-12-28 13:40:14,663  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Authority]; using defaults.
+2013-12-28 13:40:16,849  WARN [com.hong.core.security.support.FilterSecurityInterceptorSupport:141] - Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2013-12-28 13:40:32,414  WARN [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.web.controller.HomeController.home 方法开始执行！
+2013-12-28 13:40:32,502  WARN [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.web.controller.HomeController.home 方法耗时93毫秒！
+2013-12-28 13:40:32,504  WARN [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.web.controller.HomeController.home 方法执行结束！
+2013-12-28 13:40:33,056  WARN [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法开始执行！
+2013-12-28 13:40:33,391  WARN [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法耗时335毫秒！
+2013-12-28 13:40:33,400  WARN [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法执行结束！
