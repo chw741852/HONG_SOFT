@@ -121,6 +121,7 @@
          resizable:true, closable:true, closed:true">
         <form id="moduleForm" method="post">
             <input type="hidden" name="id" id="id"/>
+            <input type="hidden" name="version" id="version"/>
             <table cellpadding="0" cellspacing="2" style="width: 100%">
                 <tr>
                     <td class="fieldtitle">序号：</td>

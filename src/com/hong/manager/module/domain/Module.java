@@ -4,9 +4,9 @@ import com.hong.core.generic.domain.IdEntity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,7 +19,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sys_module")
 public class Module extends IdEntity{
-    private Long parentId;  // 父模块
+    @Transient
+    private Long parentId;  // 父模块ID
+
     @Column(length = 50)
     private String name;    // 模块名称
     private Integer authority;  // 权限等级
@@ -29,6 +31,28 @@ public class Module extends IdEntity{
     private Boolean isDisplay;  // 该功能模块是否显示
     private Integer sequence;  // 排列序号
     private Boolean isSys;  // 是否系统模块
+
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "parentId")
+    private Module parent;    // 父模块ID
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "parent")
+    private Set<Module> children = new HashSet<Module>();       // 子模块
+
+    public Module getParent() {
+        return parent;
+    }
+
+    public void setParent(Module parent) {
+        this.parent = parent;
+    }
+
+    public Set<Module> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<Module> children) {
+        this.children = children;
+    }
 
     public Boolean getSys() {
         return isSys;

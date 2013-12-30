@@ -1,7 +1,6 @@
 package com.hong.core.security.support;
 
 import com.hong.core.generic.service.IGenericService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -76,7 +75,6 @@ public class InvocationSecurityMetadataSourceSupport implements FilterInvocation
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         // object 是一个被用户请求的URL
         String url = ((FilterInvocation) o).getRequestUrl();
-        System.out.println("request url is: " + url);
         int firstQuestionMarkIndex = url.indexOf("?");
         if (firstQuestionMarkIndex != -1) {
             url = url.substring(0, firstQuestionMarkIndex);

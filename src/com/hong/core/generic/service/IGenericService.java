@@ -212,13 +212,6 @@ public interface IGenericService {
     public Object refreshCache();
 
     /**
-     * 合并更新对象，针对一个对象存不同两种实体，但主键值一样的情况下
-     * @param obj
-     * @return
-     */
-    public Object mergeUpdate(final Object obj);
-
-    /**
      * 根据bean中设置的HibernateLoadPropertyBean元数据，加载对象中属性对象
      * @param bean 要加载的bean对象
      */

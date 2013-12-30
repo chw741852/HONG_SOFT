@@ -35,7 +35,6 @@ public interface IGenericDao {
     public boolean execute(final String sql);
     public Object saveObject(final Object obj);//保存对象
     public Object updateObject(final Object obj);//更新对象
-    public Object mergeUpdate(final Object obj);
     public boolean deleteObject(final Object obj);//删除对象
     public boolean batchExecuteHql(final String sql);//批量执行hql
     public boolean deleteObject(final String sql);//根据SQL语句删除对象

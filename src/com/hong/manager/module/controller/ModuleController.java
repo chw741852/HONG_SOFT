@@ -48,6 +48,7 @@ public class ModuleController {
         return mv;
     }
 
+    // 未用到
     @RequestMapping(value = "/manager/module/quickCreate")
     public void add(String name, Long pId, HttpServletResponse response, HttpServletRequest request) {
         response.setContentType("text/html;charset=UTF-8");
@@ -99,6 +100,8 @@ public class ModuleController {
             result.put("exception", e.getMessage());
         }
 
+        Module parent = (Module)genericService.lookUp(Module.class, module.getParentId());
+        module.setParent(parent);
         if (module.getId() != null && module.getId() > 0) {
             genericService.updateObject(module);
         } else {

@@ -49,16 +49,22 @@ ScriptUtil.prototype = {
                     if (result.id > 0) {
                         $('#moduleForm')[0].reset();
                         $('#id').val(result.id);
+                        $('#version').val(result.version);
                         $('#sequence').numberspinner('setValue', result.sequence);
                         $('#name').val(result.name);
-                        $('#parentId').combotree('setValue', result.parentId);
+                        if (result.parent == null) {
+                            $('#parentId').combotree('setValue', null);
+                        } else {
+                            $('#parentId').combotree('setValue', result.parent.id);
+                        }
                         $('#actionUrl').val(result.actionUrl);
                         $('#authority').val(result.authority);
                         if (result.menu == false)
                             $("input[name='menu'][value='0']").attr("checked", true);
                         if (result.display == false)
                             $("input[name='display'][value='0']").attr("checked", true);
-
+                        if (result.sys == false)
+                            $("input[name='sys'][value='0']").attr("checked", true);
                         $('#parentId').combotree('reload', _this.defaults.contextPath + "/manager/module/ajaxFindModule?id=" + result.id);
                         $('#dlg').dialog('open').dialog('setTitle','修改模块');
                         _this.url = _this.defaults.contextPath + "/manager/module/saveOrUpdate";
@@ -121,9 +127,11 @@ ScriptUtil.prototype = {
 
                 if (result.bean.id > 0) {
                     var zTree = $.fn.zTree.getZTreeObj("moduleTree"),
-                        nodes = zTree.getNodesByParam('id', result.bean.parentId),
-                        treeNode = nodes[0];
-
+                        nodes = zTree.getNodesByParam('id', null);
+                    if (result.bean.parent != null) {
+                        nodes = zTree.getNodesByParam('id', result.bean.parent.id)
+                    }
+                    var treeNode = nodes[0];
                     if (_this.flag == "add") {
                         if (treeNode) {
                             zTree.addNodes(treeNode, {id:result.bean.id, pId:treeNode.id, name:result.bean.name});
@@ -140,6 +148,29 @@ ScriptUtil.prototype = {
                         } else {
                             zTree.moveNode(null, sourceNode, 'inner');
                         }
+                        $('#moduleId').val(result.bean.id);
+                        $('#moduleSequence').html(result.bean.sequence);
+                        $('#moduleName').html(result.bean.name);
+                        $('#parentNode').html(result.bean.parent.name);
+                        $('#moduleActionUrl').html(result.bean.actionUrl);
+                        $('#moduleAuthority').html(result.bean.authority);
+                        if (result.bean.menu == false) {
+                            $('#moduleMenu').html("否");
+                        } else {
+                            $('#moduleMenu').html("是");
+                        }
+                        if (result.bean.display == false) {
+                            $('#moduleDisplay').html("否");
+                        } else {
+                            $('#moduleDisplay').html("是");
+                        }
+                        if (result.bean.sys == false) {
+                            $('#moduleSys').html("否");
+                        } else {
+                            $('#moduleSys').html("是");
+                        }
+
+                        $('#dg').datagrid('load', {id:result.id});
                     }
                 }
 
@@ -179,8 +210,8 @@ ScriptUtil.prototype = {
             style:{
                 left:'',
                 right:0,
-                top:'',
-                bottom:-document.body.scrollTop-document.documentElement.scrollTop
+                top:document.body.scrollTop+document.documentElement.scrollTop,
+                bottom:''
             }
         });
     }

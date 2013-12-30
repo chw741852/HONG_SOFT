@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.io.Serializable;
 import java.sql.*;
@@ -29,19 +30,21 @@ import java.util.*;
 public class GenericDaoImpl implements IGenericDao {
     private static final Log log = LogFactory.getLog(GenericDaoImpl.class);
 
-    @Resource
-    private EntityManagerFactory entityManagerFactory;
-    private EntityManager getEntityManager() {
-        EntityManager em = EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerFactory);
-        if (null == em || !em.isOpen()) {
-            em = entityManagerFactory.createEntityManager();
-        }
-        return em;
-    }
+    @PersistenceContext
+    private EntityManager em;
+//    @Resource
+//    private EntityManagerFactory entityManagerFactory;
+//    private EntityManager getEntityManager() {
+//        EntityManager em = EntityManagerFactoryUtils.getTransactionalEntityManager(entityManagerFactory);
+//        if (null == em || !em.isOpen()) {
+//            em = entityManagerFactory.createEntityManager();
+//        }
+//        return em;
+//    }
 
     // 取得JDBC连接
     private Connection getConnection() {
-        Session hibernateSession = getEntityManager().unwrap(Session.class);
+        Session hibernateSession = em.unwrap(Session.class);
         try {
             return SessionFactoryUtils.getDataSource(hibernateSession.getSessionFactory()).getConnection();
         } catch (SQLException e) {
@@ -96,7 +99,7 @@ public class GenericDaoImpl implements IGenericDao {
 
     @Override
     public List executeObjectSql(String sql, int position, int length) {
-        Query query = getEntityManager().createQuery(sql);
+        Query query = em.createQuery(sql);
 
         if (position >= 0 || length > 0) {
             query.setFirstResult(position);
@@ -124,7 +127,7 @@ public class GenericDaoImpl implements IGenericDao {
 
     @Override
     public List executeObjectSql(String hql) {
-        Query query = getEntityManager().createQuery(hql);
+        Query query = em.createQuery(hql);
 
         return query.getResultList();
     }
@@ -304,20 +307,20 @@ public class GenericDaoImpl implements IGenericDao {
 
     @Override
     public Object saveObject(Object obj) {
-        getEntityManager().persist(obj);
+        em.persist(obj);
         return obj;
     }
 
     @Override
     public Object updateObject(Object obj) {
-        return getEntityManager().merge(obj);
+        return em.merge(obj);
     }
 
     @Override
     public boolean deleteObject(Object obj) {
         boolean result = false;
         try {
-            getEntityManager().remove(obj);
+            em.remove(obj);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -329,10 +332,10 @@ public class GenericDaoImpl implements IGenericDao {
     public boolean batchExecuteHql(String hql) {
         boolean result = false;
         try {
-            Query query = getEntityManager().createQuery(hql);
+            Query query = em.createQuery(hql);
             query.setHint("org.hibernate.cacheable", true);
             query.executeUpdate();
-            getEntityManager().flush();
+            em.flush();
             result = true;
         } catch (Exception e) {
             log.error("error execute: " + hql);
@@ -347,10 +350,10 @@ public class GenericDaoImpl implements IGenericDao {
         boolean result = false;
         try {
             if (sql.indexOf("delete") >= 0) {
-                Query query = getEntityManager().createQuery(sql);
+                Query query = em.createQuery(sql);
                 query.executeUpdate();
             } else {
-                Query query = getEntityManager().createQuery(" delete from " + sql);
+                Query query = em.createQuery(" delete from " + sql);
                 query.executeUpdate();
             }
             result = true;
@@ -392,7 +395,7 @@ public class GenericDaoImpl implements IGenericDao {
     @Override
     public Object lookUp(Class objClass, Serializable id) {
         if (id != null)
-            return getEntityManager().find(objClass, id);
+            return em.find(objClass, id);
         return null;
     }
 
@@ -431,14 +434,9 @@ public class GenericDaoImpl implements IGenericDao {
 
     @Override
     public Object refreshCache() {
-        getEntityManager().flush();
-        getEntityManager().clear();
+        em.flush();
+        em.clear();
         return null;
-    }
-
-    @Override
-    public Object mergeUpdate(Object obj) {
-        return getEntityManager().merge(obj);
     }
 
     @Override
@@ -489,7 +487,7 @@ public class GenericDaoImpl implements IGenericDao {
                 }
             }
         } catch (Exception e) {
-            getEntityManager().close();
+            em.close();
             log.error("error execute: " + sql);
             log.error(e.getMessage());
             e.printStackTrace();

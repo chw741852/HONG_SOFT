@@ -156,11 +156,6 @@ public class GenericServiceImpl implements IGenericService {
     }
 
     @Override
-    public Object mergeUpdate(Object obj) {
-        return genericDao.mergeUpdate(obj);
-    }
-
-    @Override
     public void loadPropertyBean(Object bean) {
         genericDao.loadPropertyBean(bean);
     }
