@@ -22,7 +22,7 @@ ScriptUtil.prototype = {
     add:function() {
         $('#moduleForm')[0].reset();
         $('#id').val('');
-        $('#parentId').combotree('reload', this.defaults.contextPath + "/manager/module/ajaxFindModule?id=0");
+        $('#parentId').combotree('reload', this.defaults.contextPath + "/manager/sys/module/ajaxFindModule?id=0");
         var zTree = $.fn.zTree.getZTreeObj("moduleTree"),
             nodes = zTree.getSelectedNodes(),
             treeNode = nodes[0];
@@ -30,7 +30,7 @@ ScriptUtil.prototype = {
             $('#parentId').combotree('setValue', treeNode.id);
         }
         $('#dlg').dialog('open').dialog('setTitle', '新建模块');
-        this.url = this.defaults.contextPath + "/manager/module/saveOrUpdate";
+        this.url = this.defaults.contextPath + "/manager/sys/module/saveOrUpdate";
         this.flag = "add";
     },
     edit:function() {
@@ -42,7 +42,7 @@ ScriptUtil.prototype = {
 
             $.ajax({
                 type: "Get",
-                url: _this.defaults.contextPath + "/manager/module/edit",
+                url: _this.defaults.contextPath + "/manager/sys/module/edit",
                 data: "id=" + treeNode.id,
                 dataType: "json",
                 success: function(result) {
@@ -65,9 +65,9 @@ ScriptUtil.prototype = {
                             $("input[name='display'][value='0']").attr("checked", true);
                         if (result.sys == false)
                             $("input[name='sys'][value='0']").attr("checked", true);
-                        $('#parentId').combotree('reload', _this.defaults.contextPath + "/manager/module/ajaxFindModule?id=" + result.id);
+                        $('#parentId').combotree('reload', _this.defaults.contextPath + "/manager/sys/module/ajaxFindModule?id=" + result.id);
                         $('#dlg').dialog('open').dialog('setTitle','修改模块');
-                        _this.url = _this.defaults.contextPath + "/manager/module/saveOrUpdate";
+                        _this.url = _this.defaults.contextPath + "/manager/sys/module/saveOrUpdate";
                         _this.flag = "edit";
                     }
                 }
@@ -90,7 +90,7 @@ ScriptUtil.prototype = {
             if (r){
                 $.ajax({
                     type: "Get",
-                    url: _this.defaults.contextPath + "/manager/module/delete",
+                    url: _this.defaults.contextPath + "/manager/sys/module/delete",
                     data: "id=" + treeNode.id,
                     success: function(result) {
                         if (result == "true") {
@@ -103,7 +103,7 @@ ScriptUtil.prototype = {
                                 $('#moduleAuthority').html('');
                                 $('#moduleMenu').html('');
                                 $('#moduleDisplay').html('');
-                                $('#dg').datagrid('reload', _this.defaults.contextPath + "/manager/module/loadChildNode?id=0");
+                                $('#dg').datagrid('reload', _this.defaults.contextPath + "/manager/sys/module/loadChildNode?id=0");
                             }
                             zTree.removeNode(treeNode, false);  //  false - 不促发回调函数
                         } else {
@@ -182,7 +182,7 @@ ScriptUtil.prototype = {
     zTreeClick:function(event, treeId, treeNode) {
         $.ajax({
             type: "Get",
-            url: scriptInstance.defaults.contextPath + "/manager/module/ajaxView",
+            url: scriptInstance.defaults.contextPath + "/manager/sys/module/ajaxView",
             data: "id=" + treeNode.id,
             dataType: "json",
             success: function(data) {

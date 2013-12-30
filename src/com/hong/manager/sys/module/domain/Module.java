@@ -1,4 +1,4 @@
-package com.hong.manager.module.domain;
+package com.hong.manager.sys.module.domain;
 
 import com.hong.core.generic.domain.IdEntity;
 import org.hibernate.annotations.Cache;

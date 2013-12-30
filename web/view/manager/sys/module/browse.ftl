@@ -14,7 +14,7 @@
     <script type="text/javascript" src="${request.contextPath}/js/ztree/js/jquery.ztree.exedit-3.5.min.js"></script>
     <script type="text/javascript" src="${request.contextPath}/js/ztree/js/jquery.ztree.excheck-3.5.min.js"></script>
 
-    <script type="text/javascript" src="${request.contextPath}/view/manager/module/module.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/view/manager/sys/module/module.js"></script>
 
     <style>
         .ztree li span.button.add {
@@ -85,7 +85,7 @@
         <table class="easyui-datagrid" title="子节点列表" style="margin: 2px auto;" id="dg"
                data-options="singleSelect:true, collapsible:true, fitColumns:true, rownumbers:true,
                 toolbar: '#tb', onLoadSuccess:easyuiInstance.onLoadSuccess,
-                url:'${request.contextPath}/manager/module/loadChildNode', method:'get'">
+                url:'${request.contextPath}/manager/sys/module/loadChildNode', method:'get'">
             <thead>
             <th data-options="field:'sequence', width:$(this).width()*0.2, editor: 'text'">序 号</th>
             <th data-options="field:'name', width:$(this).width()*0.2, editor: 'text'">名 称</th>
@@ -139,7 +139,7 @@
                     <td class="fieldtitle">父节点：</td>
                     <td class="fieldinput">
                         <input name="parentId" class="combotree easyui-combotree" id="parentId"
-                               data-options="url: '${request.contextPath}/manager/module/ajaxFindModule?id=0',
+                               data-options="url: '${request.contextPath}/manager/sys/module/ajaxFindModule?id=0',
                             method:'get', required:false, multiple:false">
                         <a href="javascript:void(0);" onclick="$('#parentId').combotree('setValue','');"
                            style="text-decoration: none;">清空</a>

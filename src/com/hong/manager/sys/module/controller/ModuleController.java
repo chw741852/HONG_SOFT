@@ -1,10 +1,9 @@
-package com.hong.manager.module.controller;
+package com.hong.manager.sys.module.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.hong.core.generic.service.IGenericService;
-import com.hong.manager.module.domain.Module;
-import org.apache.log4j.Logger;
+import com.hong.manager.sys.module.domain.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +33,9 @@ public class ModuleController {
     @Autowired
     private IGenericService genericService;
 
-    @RequestMapping(value = "/manager/module/browse")
+    @RequestMapping(value = "/manager/sys/module/browse")
     public ModelAndView browseModule() {
-        ModelAndView mv = new ModelAndView("/manager/module/browse");
+        ModelAndView mv = new ModelAndView("/manager/sys/module/browse");
 
         String sql = "select id, isnull(parentId,0) pId, name from sys_module order by sequence, id asc";
         List<Map> moduleList = genericService.executeSqlToRecordMap(sql);
@@ -49,7 +48,7 @@ public class ModuleController {
     }
 
     // 未用到
-    @RequestMapping(value = "/manager/module/quickCreate")
+    @RequestMapping(value = "/manager/sys/module/quickCreate")
     public void add(String name, Long pId, HttpServletResponse response, HttpServletRequest request) {
         response.setContentType("text/html;charset=UTF-8");
         try {
@@ -72,9 +71,9 @@ public class ModuleController {
         }
     }
 
-    @RequestMapping(value = "/manager/module/view")
+    @RequestMapping(value = "/manager/sys/module/view")
     public ModelAndView view(Long id) {
-        ModelAndView mv = new ModelAndView("/manager/module/view");
+        ModelAndView mv = new ModelAndView("/manager/sys/module/view");
         if (id != null && id > 0) {
             Module module = (Module)genericService.lookUp(Module.class, id);
             mv.addObject("module", module);
@@ -82,14 +81,14 @@ public class ModuleController {
         return mv;
     }
 
-    @RequestMapping(value = "/manager/module/add")
+    @RequestMapping(value = "/manager/sys/module/add")
     public ModelAndView add() {       // 暂未启用，以后可能也不会用
-        ModelAndView mv = new ModelAndView("/manager/module/add");
+        ModelAndView mv = new ModelAndView("/manager/sys/module/add");
 
         return mv;
     }
 
-    @RequestMapping(value = "/manager/module/saveOrUpdate")
+    @RequestMapping(value = "/manager/sys/module/saveOrUpdate")
     public void saveOrUpdate(HttpServletRequest request, HttpServletResponse response, Module module) {
         Map<String, Object> result = new HashMap<String, Object>();
         response.setContentType("text/html;charset=UTF-8");
@@ -124,7 +123,7 @@ public class ModuleController {
         }
     }
 
-    @RequestMapping(value = "/manager/module/ajaxFindModule")
+    @RequestMapping(value = "/manager/sys/module/ajaxFindModule")
     public void ajaxFindModule(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         try {
@@ -152,7 +151,7 @@ public class ModuleController {
         }
     }
 
-    @RequestMapping(value = "/manager/module/loadChildNode")
+    @RequestMapping(value = "/manager/sys/module/loadChildNode")
     public void loadChildNode(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         try {
@@ -189,7 +188,7 @@ public class ModuleController {
         }
     }
 
-    @RequestMapping(value = "/manager/module/ajaxView")
+    @RequestMapping(value = "/manager/sys/module/ajaxView")
     public void ajaxView(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("id");
@@ -212,7 +211,7 @@ public class ModuleController {
         }
     }
 
-    @RequestMapping("/manager/module/edit")
+    @RequestMapping("/manager/sys/module/edit")
     public void edit(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         try {
@@ -235,7 +234,7 @@ public class ModuleController {
         }
     }
 
-    @RequestMapping(value = "/manager/module/delete")
+    @RequestMapping(value = "/manager/sys/module/delete")
     public void delete(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
 

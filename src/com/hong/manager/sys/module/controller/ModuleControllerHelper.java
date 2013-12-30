@@ -1,7 +1,7 @@
-package com.hong.manager.module.controller;
+package com.hong.manager.sys.module.controller;
 
 import com.hong.core.generic.service.IGenericService;
-import com.hong.manager.module.domain.Module;
+import com.hong.manager.sys.module.domain.Module;
 
 import java.util.List;
 import java.util.Map;
