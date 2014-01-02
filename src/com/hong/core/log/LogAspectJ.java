@@ -21,12 +21,12 @@ public class LogAspectJ {
 
     @Before("anyMethod()")
     public void beforeAdvice(JoinPoint joinPoint) {
-        logger.warn("前置通知：" + getMethodName(joinPoint) + " 方法开始执行！");
+        logger.info("前置通知：" + getMethodName(joinPoint) + " 方法开始执行！");
     }
 
 //    @AfterReturning("anyMethod()")
 //    public void afterReturningAdvice(JoinPoint joinPoint) {
-//        logger.warn("后置通知：" + getMethodName(joinPoint) + " 方法执行正常结束！");
+//        logger.info("后置通知：" + getMethodName(joinPoint) + " 方法执行正常结束！");
 //    }
 
     @AfterThrowing(pointcut = "anyMethod()", throwing = "e")
@@ -36,7 +36,7 @@ public class LogAspectJ {
 
     @After("anyMethod()")
     public void afterAdvice(JoinPoint joinPoint) {
-        logger.warn("最终通知：" + getMethodName(joinPoint) + " 方法执行结束！");
+        logger.info("最终通知：" + getMethodName(joinPoint) + " 方法执行结束！");
     }
 
     @Around("anyMethod()")
@@ -45,7 +45,7 @@ public class LogAspectJ {
         // 传递给连接点对象进行接力处理
         Object result = pjp.proceed();
         long endTime = System.currentTimeMillis();
-        logger.warn("环绕通知：" + getMethodName(pjp) + " 方法耗时" + (endTime - beginTime) + "毫秒！");
+        logger.info("环绕通知：" + getMethodName(pjp) + " 方法耗时" + (endTime - beginTime) + "毫秒！");
 
         return result;
     }
