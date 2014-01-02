@@ -4,7 +4,6 @@ import com.hong.core.generic.service.IGenericService;
 import com.hong.core.security.domain.Role;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,9 +19,12 @@ import javax.annotation.Resource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-        "classpath:../config/spring/spring-base.xml",
-        "classpath:../config/spring/spring-servlet.xml"
+        "file:web/WEB-INF/config/spring/spring-base.xml",
+        "file:web/WEB-INF/config/spring/spring-servlet.xml"
 })
+/*
+ * 需要将spring-base.xml中的propertyConfig路径改为‘file:web/..’形式才可以运行
+ */
 public class GenericServiceTest {
     @Resource(name = "genericService")
     private IGenericService publicService;
