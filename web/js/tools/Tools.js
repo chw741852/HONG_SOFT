@@ -31,5 +31,13 @@ ScriptTools.prototype = {
                 pTar.width = pTar.Document.body.scrollWidth;
             }
         }
+    },
+    setTheme:function(obj, section, theme, defaultTheme, cssName) {
+        if (theme == undefined) {
+            theme = defaultTheme;
+        }
+        var url = $(obj).attr("href");
+        var href = url.substring(0, url.indexOf(section)) + section + "/" + theme + "/" + cssName;
+        $(obj).attr("href", href);
     }
 }

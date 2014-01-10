@@ -1,0 +1,49 @@
+.table1 {
+    width: 99%;
+    margin: 2px auto;
+    border-right: 1px solid #f6c1bc;
+    border-bottom: 1px solid #f6c1bc;
+}
+
+.table1 thead td {
+    background-color: #f0e1e3;
+    padding-left: 10px;
+    height: 25px;
+}
+
+.table1 td {
+    border-top: 1px solid #f6c1bc;
+    border-left: 1px solid #f6c1bc;
+    font-weight: bold;
+    vertical-align: middle;
+    height: 20px;
+}
+
+.table1 .fieldtitle {
+    color: #333;
+    padding: 3px 5px 0 0;
+    width: 15%;
+    text-align: right;
+}
+
+.table1 .fieldinput {
+    width: 35%;
+}
+
+.table1 .fieldinput div {
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.table1 td .inputtxt {
+    width: 88%;
+    border: 1px solid #bbb;
+    font-size: 12px;
+    height: 17px;
+}
+
+.table1 td .selectfield {
+    width: 88%;
+    border: 1px solid #bbb;
+    font-size: 14px;
+}

@@ -2,22 +2,44 @@
 <html>
 <head>
     <title>Hong Soft</title>
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/js/easyui/themes/metro/easyui.css">
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/js/easyui/themes/icon.css">
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/js/ztree/css/demo.css">
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/js/ztree/css/zTreeStyle/zTreeStyle.css">
+    <link id="easyuiTheme" rel="stylesheet" type="text/css"
+          href="${rc.contextPath}/js/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/js/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/js/ztree/css/demo.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/js/ztree/css/zTreeStyle/zTreeStyle.css">
+    <script type="text/javascript" src="${rc.contextPath}/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/ztree/js/jquery.ztree.core-3.5.min.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/tools/Tools.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/view/manager/js/home.js"></script>
 
-    <script type="text/javascript" src="${request.contextPath}/js/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/js/easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/js/ztree/js/jquery.ztree.core-3.5.min.js"></script>
-
-    <script type="text/javascript" src="${request.contextPath}/view/manager/js/home.js"></script>
+    <script type="text/javascript">
+        var scriptTools = new ScriptTools();
+        $(function(){
+            var themeName = $.cookie("themeName");
+            scriptTools.setTheme($("#easyuiTheme"), "themes", themeName, "default", "easyui.css");
+            if (themeName != undefined) {
+                $("#theme option[value=" + themeName + "]").attr("selected", "true");
+            }
+        });
+    </script>
 </head>
 <body class="easyui-layout">
-<div data-options="region:'north', split:true" style="height: 57px; padding: 0; width: 100%; background: transparent">
-    <div style="width: 100%; height: 100%; background-image: url(${request.contextPath}/images/main/title.jpg);
+<div data-options="region:'north', split:true" style="height: 57px; padding: 0; width: 100%;">
+    <#--<div style="width: 100%; height: 100%; background-image: url(${rc.contextPath}/images/main/title.jpg);
             background-repeat: repeat; background-position: left; text-align: right;">
         <div style="margin: auto;"><h1 STYLE="COLOR: #FFFFCC"> </h1></div>
+    </div>-->
+    <div style="float: right; margin: 13px 20px;">
+        <select id="theme" onchange="scriptInstance.changeTheme()">
+            <option value="default">default</option>
+            <option value="metro-gray">metro-gray</option>
+            <option value="metro-green">metro-green</option>
+            <option value="metro-orange">metro-orange</option>
+            <option value="metro-red">metro-red</option>
+            <option value="metro-blue">metro-blue</option>
+        </select>
     </div>
 </div>
 
@@ -55,7 +77,7 @@
 </div>
 
 <script type="text/javascript">
-    var defaults = { contextPath:'${request.contextPath}' };
+    var defaults = { contextPath:'${rc.contextPath}' };
     var scriptInstance = new ScriptUtil(defaults);
 </script>
 </body>

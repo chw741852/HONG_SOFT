@@ -89,10 +89,34 @@ ScriptUtil.prototype = {
             });
         } else {
             this.refreshTab(tabName, action);
+            $("#tabs").tabs("select", tabName);
         }
     },
     refreshTab:function(tabName, action) {
         var tab = $("#tabs").tabs('getTab', tabName);
         tab.find('iframe')[0].contentWindow.location.href = this.defaults.contextPath + action;
+    },
+    changeTheme:function() {
+        var url = $("#easyuiTheme").attr("href");
+        var href = url.substring(0, url.indexOf("themes")) + "themes/" + $("#theme").val() + "/easyui.css";
+        $("#easyuiTheme").attr("href", href);
+
+        var $iframe = $("iframe");
+        if ($iframe.length > 0) {
+            for (var i=0; i<$iframe.length; i++) {
+                $iframe.eq(i).contents().find("#easyuiTheme").attr("href", href);
+                var $tableTheme = $iframe.eq(i).contents().find("#tableTheme");
+                if ($tableTheme.attr("href") != undefined && $tableTheme.attr("href") != null) {
+                    var tableUrl = $tableTheme.attr("href");
+                    var tableHref = tableUrl.substring(0, tableUrl.indexOf("themes")) + "themes/" + $("#theme").val() + "/table.css";
+                    $tableTheme.attr("href", tableHref);
+                }
+            }
+        }
+
+        $.cookie("themeName", $("#theme").val(), {
+            path: this.defaults.contextPath + "/",
+            expires: 7      // cookie期限为7天
+        });
     }
 }

@@ -3,18 +3,21 @@
 <head>
     <title>模块管理</title>
 
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/css/form.css">
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/js/easyui/themes/metro/easyui.css">
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/js/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/css/form.css">
+    <link id="easyuiTheme" rel="stylesheet" type="text/css" href="${rc.contextPath}/js/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/js/easyui/themes/icon.css">
 
-    <script type="text/javascript" src="${request.contextPath}/js/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/js/easyui/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/js/validate/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/js/validate/messages_zh.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/validate/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/validate/messages_zh.js"></script>
 
-    <script type="text/javascript" src="${request.contextPath}/view/manager/module/module.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/tools/Tools.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/view/manager/module/module.js"></script>
 
     <script type="text/javascript">
+        var scriptTools = new ScriptTools();
         $.validate.setDefaults({
             submitHandler: function() {
                 alert("submitHandler");
@@ -22,6 +25,7 @@
             }
         });
         $(function(){
+            scriptTools.setTheme($("#easyuiTheme"), "themes", $.cookie("themeName"), "default", "easyui.css");
             $("#saveForm").validate();
         });
         function submit() {
@@ -33,7 +37,7 @@
 <#escape x as x!>
 <div class="ftitle">模块管理 - 新建</div>
 <div>
-    <form action="${request.ContextPath}/manager/module/save" name="saveForm" id="saveForm" method="post">
+    <form action="${rc.ContextPath}/manager/module/save" name="saveForm" id="saveForm" method="post">
         <table cellpadding="0" cellspacing="2" style="width: 100%">
             <tr>
                 <td class="fieldtitle">名称：</td>

@@ -3,12 +3,13 @@
 <html>
 <head>
     <title>测试Freemarker</title>
-    <link type="text/css" rel="stylesheet" href="${request.contextPath}/css/front.css">
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/js/easyui/themes/metro/easyui.css">
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/js/easyui/themes/icon.css">
+    <link type="text/css" rel="stylesheet" href="${rc.contextPath}/css/front.css">
+    <link id="easyuiTheme" rel="stylesheet" type="text/css"
+          href="${rc.contextPath}/js/easyui/themes/${(cookies.themeName)!"default"}/easyui.css">
+    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/js/easyui/themes/icon.css">
 
-    <script type="text/javascript" src="${request.contextPath}/js/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/easyui/jquery.easyui.min.js"></script>
 </head>
 <body>
 <div class="nav"></div>
@@ -22,7 +23,7 @@
 
 <table class="easyui-datagrid" title="子节点列表" style="margin: 2px auto;" id="dg"
        data-options="singleSelect:true, collapsible:true, fitColumns:true, rownumbers:true,
-                toolbar: '#tb', url:'${request.contextPath}/test/easyui', method:'get'">
+                toolbar: '#tb', url:'${rc.contextPath}/test/easyui', method:'get'">
     <thead>
     <th data-options="field:'sequence', width:$(this).width()*0.2, editor: 'text'">序 号</th>
     <th data-options="field:'name', width:$(this).width()*0.2, editor: 'text'">名 称</th>

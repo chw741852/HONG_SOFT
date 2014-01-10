@@ -25,21 +25,6 @@
     <!-- 日志切面 -->
     <bean id="logAspectJ" class="com.hong.core.log.LogAspectJ"/>
 
-    <!-- freemarker配置 -->
-    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/view/"/>
-        <property name="defaultEncoding" value="utf-8"/>
-        <property name="freemarkerSettings">
-            <props>
-                <prop key="template_update_delay">0</prop>
-                <prop key="locale">zh_CN</prop>
-                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
-                <prop key="date_format">yyyy-MM-dd</prop>
-                <prop key="number_format">#.##</prop>
-            </props>
-        </property>
-    </bean>
-
     <!-- 视图解释类 -->
     <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/view/"/>
@@ -49,9 +34,10 @@
     <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="cache" value="false"/>
         <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
+        <property name="prefix" value=""/>
         <property name="suffix" value=".ftl"/>
         <property name="contentType" value="text/html;charset=UTF-8"/>
-        <property name="requestContextAttribute" value="request"/>
+        <property name="requestContextAttribute" value="rc"/>
         <property name="exposeSpringMacroHelpers" value="true"/>
         <property name="exposeRequestAttributes" value="true"/>
         <property name="exposeSessionAttributes" value="true"/>
