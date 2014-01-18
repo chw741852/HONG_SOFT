@@ -32,6 +32,14 @@ ScriptTools.prototype = {
             }
         }
     },
+    /**
+     * 设置皮肤
+     * @param obj
+     * @param section 修改URL的截点位置
+     * @param theme cookie中保存的皮肤
+     * @param defaultTheme  默认皮肤
+     * @param cssName
+     */
     setTheme:function(obj, section, theme, defaultTheme, cssName) {
         if (theme == undefined) {
             theme = defaultTheme;

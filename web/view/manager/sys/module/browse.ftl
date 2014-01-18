@@ -31,14 +31,13 @@
             *vertical-align:middle
         }
     </style>
-
 </head>
 <body class="easyui-layout">
 
 <div data-options="region:'west', split:true, title:'模块管理', tools:'#p-tools'" style="width: 220px; overflow: hidden;">
-    <div style="padding: 10px;" class="ztree" id="moduleTree">
+        <div style="padding: 10px;" class="ztree" id="moduleTree">
 
-    </div>
+        </div>
 </div>
 
 <div data-options="region:'center'" style="overflow: hidden;">
@@ -227,6 +226,7 @@
         },
         callback: {
             beforeDrag: scriptInstance.beforeDrag,
+            beforeDrop: scriptInstance.beforeDrop,
             onClick: scriptInstance.zTreeClick
         }
     };

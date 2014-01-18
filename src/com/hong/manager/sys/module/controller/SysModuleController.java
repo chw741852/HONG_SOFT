@@ -3,7 +3,8 @@ package com.hong.manager.sys.module.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.hong.core.generic.service.IGenericService;
-import com.hong.manager.sys.module.domain.Module;
+import com.hong.manager.sys.module.domain.SysModule;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,8 @@ import java.util.Map;
  */
 
 @Controller
-public class ModuleController {
-//    private static final Logger logger = Logger.getLogger(ModuleController.class);
+public class SysModuleController {
+    private static final Logger logger = Logger.getLogger(SysModuleController.class);
 
     @Autowired
     private IGenericService genericService;
@@ -57,13 +58,13 @@ public class ModuleController {
             e.printStackTrace();
         }
 
-        Module module = new Module();
-        module.setName(name);
-        module.setParentId(pId);
-        genericService.saveObject(module);
+        SysModule sysModule = new SysModule();
+        sysModule.setName(name);
+        sysModule.setParentId(pId);
+        genericService.saveObject(sysModule);
 
         try {
-            response.getWriter().write(JSON.toJSONString(module));
+            response.getWriter().write(JSON.toJSONString(sysModule));
             response.getWriter().flush();
             response.getWriter().close();
         } catch (IOException e) {
@@ -75,8 +76,8 @@ public class ModuleController {
     public ModelAndView view(Long id) {
         ModelAndView mv = new ModelAndView("/manager/sys/module/view");
         if (id != null && id > 0) {
-            Module module = (Module)genericService.lookUp(Module.class, id);
-            mv.addObject("module", module);
+            SysModule sysModule = (SysModule)genericService.lookUp(SysModule.class, id);
+            mv.addObject("module", sysModule);
         }
         return mv;
     }
@@ -89,7 +90,7 @@ public class ModuleController {
     }
 
     @RequestMapping(value = "/manager/sys/module/saveOrUpdate")
-    public void saveOrUpdate(HttpServletRequest request, HttpServletResponse response, Module module) {
+    public void saveOrUpdate(HttpServletRequest request, HttpServletResponse response, SysModule sysModule) {
         Map<String, Object> result = new HashMap<String, Object>();
         response.setContentType("text/html;charset=UTF-8");
         try {
@@ -97,19 +98,20 @@ public class ModuleController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             result.put("exception", e.getMessage());
+            logger.warn(e.getMessage());
         }
 
-        Module parent = (Module)genericService.lookUp(Module.class, module.getParentId());
-        module.setParent(parent);
-        if (module.getId() != null && module.getId() > 0) {
-            genericService.updateObject(module);
+        SysModule parent = (SysModule)genericService.lookUp(SysModule.class, sysModule.getParentId());
+        sysModule.setParent(parent);
+        if (sysModule.getId() != null && sysModule.getId() > 0) {
+            genericService.updateObject(sysModule);
         } else {
-            genericService.saveObject(module);
+            genericService.saveObject(sysModule);
         }
 
-        if (module != null && module.getId() > 0) {
+        if (sysModule != null && sysModule.getId() > 0) {
             result.put("message", "保存成功！");
-            result.put("bean", module);
+            result.put("bean", sysModule);
         } else {
             result.put("message", "保存失败！");
         }
@@ -120,6 +122,7 @@ public class ModuleController {
             response.getWriter().close();
         } catch (IOException e) {
             e.printStackTrace();
+            logger.warn(e.getMessage());
         }
     }
 
@@ -130,6 +133,7 @@ public class ModuleController {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+            logger.warn(e.getMessage());
         }
 
         String id = request.getParameter("id");
@@ -137,7 +141,7 @@ public class ModuleController {
         String sql = "select id, name as text from sys_module where parentId is null and id<>'" + id + "'";
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
-        ModuleControllerHelper helper = new ModuleControllerHelper(genericService);
+        SysModuleControllerHelper helper = new SysModuleControllerHelper(genericService);
         for (Map map:result) {
             helper.findChildren(id, map);
         }
@@ -148,6 +152,7 @@ public class ModuleController {
             response.getWriter().close();
         } catch (IOException e) {
             e.printStackTrace();
+            logger.warn(e.getMessage());
         }
     }
 
@@ -185,6 +190,7 @@ public class ModuleController {
             response.getWriter().close();
         } catch (IOException e) {
             e.printStackTrace();
+            logger.warn(e.getMessage());
         }
     }
 
@@ -208,6 +214,7 @@ public class ModuleController {
             response.getWriter().close();
         } catch (IOException e) {
             e.printStackTrace();
+            logger.warn(e.getMessage());
         }
     }
 
@@ -221,16 +228,17 @@ public class ModuleController {
         }
 
         String id = request.getParameter("id");
-        Module module = (Module)genericService.lookUp(Module.class, Long.parseLong(id));
-        if (module == null) {
-            module = new Module();
+        SysModule sysModule = (SysModule)genericService.lookUp(SysModule.class, Long.parseLong(id));
+        if (sysModule == null) {
+            sysModule = new SysModule();
         }
         try {
-            response.getWriter().write(JSON.toJSONString(module));
+            response.getWriter().write(JSON.toJSONString(sysModule));
             response.getWriter().flush();
             response.getWriter().close();
         } catch (IOException e) {
             e.printStackTrace();
+            logger.warn(e.getMessage());
         }
     }
 
@@ -240,10 +248,10 @@ public class ModuleController {
 
         boolean flag = false;
         String id = request.getParameter("id");
-        Module module = (Module)genericService.lookUp(Module.class, Long.parseLong(id));
+        SysModule sysModule = (SysModule)genericService.lookUp(SysModule.class, Long.parseLong(id));
 
-        ModuleControllerHelper helper = new ModuleControllerHelper(genericService);
-        flag = helper.deleteChildren(module);
+        SysModuleControllerHelper helper = new SysModuleControllerHelper(genericService);
+        flag = helper.deleteChildren(sysModule);
 
         try {
             response.getWriter().print(flag);
@@ -251,6 +259,7 @@ public class ModuleController {
             response.getWriter().close();
         } catch (IOException e) {
             e.printStackTrace();
+            logger.warn(e.getMessage());
         }
     }
 }

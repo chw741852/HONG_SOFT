@@ -14,11 +14,12 @@ import java.util.Set;
  * Date: 13-11-25
  * Time: 下午2:31
  * To change this template use File | Settings | File Templates.
+ * 查询模块
  */
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
 @Table(name = "sys_module")
-public class Module extends IdEntity{
+public class SysModule extends IdEntity{
     @Transient
     private Long parentId;  // 父模块ID
 
@@ -34,23 +35,23 @@ public class Module extends IdEntity{
 
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(name = "parentId")
-    private Module parent;    // 父模块ID
+    private SysModule parent;    // 父模块ID
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "parent")
-    private Set<Module> children = new HashSet<Module>();       // 子模块
+    private Set<SysModule> children = new HashSet<SysModule>();       // 子模块
 
-    public Module getParent() {
+    public SysModule getParent() {
         return parent;
     }
 
-    public void setParent(Module parent) {
+    public void setParent(SysModule parent) {
         this.parent = parent;
     }
 
-    public Set<Module> getChildren() {
+    public Set<SysModule> getChildren() {
         return children;
     }
 
-    public void setChildren(Set<Module> children) {
+    public void setChildren(Set<SysModule> children) {
         this.children = children;
     }
 

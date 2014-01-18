@@ -1,7 +1,7 @@
 package com.hong.manager.sys.module.controller;
 
 import com.hong.core.generic.service.IGenericService;
-import com.hong.manager.sys.module.domain.Module;
+import com.hong.manager.sys.module.domain.SysModule;
 
 import java.util.List;
 import java.util.Map;
@@ -13,10 +13,10 @@ import java.util.Map;
  * Time: 下午2:41
  * To change this template use File | Settings | File Templates.
  */
-public class ModuleControllerHelper {
+public class SysModuleControllerHelper {
     private IGenericService genericService;
 
-    public ModuleControllerHelper(IGenericService genericService) {
+    public SysModuleControllerHelper(IGenericService genericService) {
         this.genericService = genericService;
     }
 
@@ -32,16 +32,16 @@ public class ModuleControllerHelper {
         }
     }
 
-    public boolean deleteChildren(Module module) {
-        String hql = "from " + Module.class.getName() + " a where a.parentId=" + module.getId();
-        List<Module> childNodes = genericService.executeObjectSql(hql);
+    public boolean deleteChildren(SysModule sysModule) {
+        String hql = "from " + SysModule.class.getName() + " a where a.parentId=" + sysModule.getId();
+        List<SysModule> childNodes = genericService.executeObjectSql(hql);
         if (childNodes != null && childNodes.size() > 0) {
-            for(Module child:childNodes) {
+            for(SysModule child:childNodes) {
                 if(deleteChildren(child) == false) {
                     return false;
                 }
             }
         }
-        return genericService.deleteObject(module);
+        return genericService.deleteObject(sysModule);
     }
 }

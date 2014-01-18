@@ -4,8 +4,7 @@
 <head>
     <title>测试Freemarker</title>
     <link type="text/css" rel="stylesheet" href="${rc.contextPath}/css/front.css">
-    <link id="easyuiTheme" rel="stylesheet" type="text/css"
-          href="${rc.contextPath}/js/easyui/themes/${(cookies.themeName)!"default"}/easyui.css">
+    <link id="easyuiTheme" rel="stylesheet" type="text/css" href="${rc.contextPath}/js/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="${rc.contextPath}/js/easyui/themes/icon.css">
 
     <script type="text/javascript" src="${rc.contextPath}/js/jquery-1.8.0.min.js"></script>

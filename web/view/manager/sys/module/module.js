@@ -17,7 +17,10 @@ function ScriptUtil(defaults) {
 
 ScriptUtil.prototype = {
     beforeDrag:function(treeId, treeNodes) {
-        return false;
+        return true;
+    },
+    beforeDrop:function(treeId, treeNodes, targetNode, moveType) {
+        return true;
     },
     add:function() {
         $('#moduleForm')[0].reset();
