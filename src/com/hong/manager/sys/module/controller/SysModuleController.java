@@ -50,7 +50,7 @@ public class SysModuleController {
 
     // 未用到
     @RequestMapping(value = "/manager/sys/module/quickCreate")
-    public void add(String name, Long pId, HttpServletResponse response, HttpServletRequest request) {
+    public void add(String name, Long pId, HttpServletResponse response, HttpServletRequest request) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
             request.setCharacterEncoding("UTF-8");
@@ -63,13 +63,9 @@ public class SysModuleController {
         sysModule.setParentId(pId);
         genericService.saveObject(sysModule);
 
-        try {
-            response.getWriter().write(JSON.toJSONString(sysModule));
-            response.getWriter().flush();
-            response.getWriter().close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        response.getWriter().write(JSON.toJSONString(sysModule));
+        response.getWriter().flush();
+        response.getWriter().close();
     }
 
     @RequestMapping(value = "/manager/sys/module/view")
@@ -90,16 +86,9 @@ public class SysModuleController {
     }
 
     @RequestMapping(value = "/manager/sys/module/saveOrUpdate")
-    public void saveOrUpdate(HttpServletRequest request, HttpServletResponse response, SysModule sysModule) {
+    public void saveOrUpdate(HttpServletRequest request, HttpServletResponse response, SysModule sysModule) throws IOException {
         Map<String, Object> result = new HashMap<String, Object>();
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            request.setCharacterEncoding("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            result.put("exception", e.getMessage());
-            logger.warn(e.getMessage());
-        }
 
         SysModule parent = (SysModule)genericService.lookUp(SysModule.class, sysModule.getParentId());
         sysModule.setParent(parent);
@@ -116,25 +105,14 @@ public class SysModuleController {
             result.put("message", "保存失败！");
         }
 
-        try {
-            response.getWriter().print(JSON.toJSONString(result));
-            response.getWriter().flush();
-            response.getWriter().close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.warn(e.getMessage());
-        }
+        response.getWriter().print(JSON.toJSONString(result));
+        response.getWriter().flush();
+        response.getWriter().close();
     }
 
     @RequestMapping(value = "/manager/sys/module/ajaxFindModule")
-    public void ajaxFindModule(HttpServletRequest request, HttpServletResponse response) {
+    public void ajaxFindModule(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            request.setCharacterEncoding("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            logger.warn(e.getMessage());
-        }
 
         String id = request.getParameter("id");
 
@@ -146,18 +124,13 @@ public class SysModuleController {
             helper.findChildren(id, map);
         }
 //        System.out.println(JSON.toJSONString(result));
-        try {
-            response.getWriter().print(JSON.toJSONString(result));
-            response.getWriter().flush();
-            response.getWriter().close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.warn(e.getMessage());
-        }
+        response.getWriter().print(JSON.toJSONString(result));
+        response.getWriter().flush();
+        response.getWriter().close();
     }
 
     @RequestMapping(value = "/manager/sys/module/loadChildNode")
-    public void loadChildNode(HttpServletRequest request, HttpServletResponse response) {
+    public void loadChildNode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
             request.setCharacterEncoding("UTF-8");
@@ -184,18 +157,13 @@ public class SysModuleController {
         }
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
-        try {
-            response.getWriter().write(JSON.toJSONString(result));
-            response.getWriter().flush();
-            response.getWriter().close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.warn(e.getMessage());
-        }
+        response.getWriter().write(JSON.toJSONString(result));
+        response.getWriter().flush();
+        response.getWriter().close();
     }
 
     @RequestMapping(value = "/manager/sys/module/ajaxView")
-    public void ajaxView(HttpServletRequest request, HttpServletResponse response) {
+    public void ajaxView(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("id");
 
@@ -208,42 +176,28 @@ public class SysModuleController {
                 " where a.id=" + id;
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
-        try {
-            response.getWriter().write(JSON.toJSONString(result));
-            response.getWriter().flush();
-            response.getWriter().close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.warn(e.getMessage());
-        }
+        response.getWriter().write(JSON.toJSONString(result));
+        response.getWriter().flush();
+        response.getWriter().close();
     }
 
     @RequestMapping("/manager/sys/module/edit")
-    public void edit(HttpServletRequest request, HttpServletResponse response) {
+    public void edit(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            request.setCharacterEncoding("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
 
         String id = request.getParameter("id");
         SysModule sysModule = (SysModule)genericService.lookUp(SysModule.class, Long.parseLong(id));
         if (sysModule == null) {
             sysModule = new SysModule();
         }
-        try {
-            response.getWriter().write(JSON.toJSONString(sysModule));
-            response.getWriter().flush();
-            response.getWriter().close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.warn(e.getMessage());
-        }
+
+        response.getWriter().write(JSON.toJSONString(sysModule));
+        response.getWriter().flush();
+        response.getWriter().close();
     }
 
     @RequestMapping(value = "/manager/sys/module/delete")
-    public void delete(HttpServletRequest request, HttpServletResponse response) {
+    public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
 
         boolean flag = false;
@@ -253,13 +207,8 @@ public class SysModuleController {
         SysModuleControllerHelper helper = new SysModuleControllerHelper(genericService);
         flag = helper.deleteChildren(sysModule);
 
-        try {
-            response.getWriter().print(flag);
-            response.getWriter().flush();
-            response.getWriter().close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.warn(e.getMessage());
-        }
+        response.getWriter().print(flag);
+        response.getWriter().flush();
+        response.getWriter().close();
     }
 }
