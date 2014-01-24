@@ -22,8 +22,6 @@ public interface IGenericService {
      */
     public List executeObjectSql(final String sql, final int position, final int length);
 
-    public List executeNoLazyObjectSql(final String sql, final int position, final int length);
-
     /**
      * 执行SQL语句(可分页取出某段记录，若position=0,length=0时表示查询表中所有记录)
      * @param sql
@@ -32,24 +30,6 @@ public interface IGenericService {
      * @return
      */
     public List executeSql(final String sql, final int position, final int length);
-
-    /**
-     * 执行SQL语句(可分页取出某段记录，若position=0,length=0时表示查询表中所有记录)
-     * @param sql
-     * @param position
-     * @param length
-     * @param fieldsMap 查询列表中所有列结构信息
-     * @return
-     */
-    public List executeSql(final String sql, final int position, final int length, Map fieldsMap);
-
-    /**
-     * 通过sql查询返回结果集,并且返回字段属性集合
-     * @param sql
-     * @param fieldsMap 字段属性集合
-     * @return
-     */
-    public List executeSql(final String sql, Map fieldsMap);
 
     /**
      * 执行sql语句，并返回所有查询结果
@@ -66,25 +46,6 @@ public interface IGenericService {
     public List executeObjectSql(final String hql);
 
     /**
-     * 非延时加载执行Hsql,并返回所有查询结果.
-     * 若集合对象中加了元数据类型(HibernateNoLazyBean,支持嵌套属性)
-     * 或集合对象中某个属性对象加入了元数据类型(HibernateNoLazyProperty)
-     * 就可以获得非延时加载该对象下面的属性对象
-     * @param hql
-     * @return
-     */
-    public List executeNoLazyObjectSql(final String hql);
-
-    /**
-     * 深度非延时加载执行Hsql,并返回所有查询结果.
-     * 若集合对象中加了元数据类型(HibernateNoLazyBean,支持嵌套属性)
-     * 或集合对象中某个属性对象加入了元数据类型(HibernateNoLazyProperty)
-     * @param hql
-     * @return
-     */
-    public List executeDepthNoLazyObjectSql(final String hql);
-
-    /**
      * 执行Sql语句，不返回结果集(如添加、修改、删除功能)
      * @param sql
      * @return
@@ -97,14 +58,14 @@ public interface IGenericService {
      * @param sql
      * @return
      */
-    public int getSqlRecordCount(final String sql);
+    public long getSqlRecordCount(final String sql);
 
     /**
      * 取得对象hql语句记录数
      * @param hql
      * @return
      */
-    public int getObjectSqlRecordCount(final String hql);
+    public long getObjectSqlRecordCount(final String hql);
 
     /**
      * 保存对象
@@ -132,7 +93,7 @@ public interface IGenericService {
      * @param hql
      * @return 布尔类型.执行sql正确就返回true,否则返回false
      */
-    public boolean batchExecuteHql(final String hql);
+    public int batchExecuteHql(final String hql);
 
     /**
      * 删除list集合中的所有对象
@@ -153,7 +114,7 @@ public interface IGenericService {
      * @param hql
      * @return  返回布尔类型,删除成功为tru,否则为false
      */
-    public boolean deleteObject(final String hql);
+    public boolean deleteObjectHql(final String hql);
 
     /**
      * 根据主键查询对象
@@ -162,52 +123,6 @@ public interface IGenericService {
      * @return 返回查询的对象,若为空表示查询不成功
      */
     public Object lookUp(Class objectClass, Serializable id);
-
-    /**
-     * 延时加载类,当需要一次性加载类下面某些集合属性对象的话,就可用该方法
-     * @param objClass 主对象
-     * @param id 主键
-     * @param setFieldNames 需要延时加载的集合的set属性方法名称数组,支持嵌套方法,如getCrmEmployee.getCrmCompany
-     * @return
-     */
-    public Object findNoLazyObject(Class objClass, Serializable id, String[] setFieldNames);
-
-    /**
-     * 延时加载类,当需要一次性加载类下面某些集合属性对象的话,就可用该方法
-     * @param objClass
-     * @param id
-     * @param methodName 需要延时加载的集合的set属性方法名称,支持嵌套方法,如getCrmEmployee.getCrmCompany
-     * @return
-     */
-    public Object findNoLazyObject(final Class objClass, final Serializable id, final String methodName);
-
-    /**
-     * 非延时加载查询对象,是针对对象中有SET集合对象的进行非延时加载
-     * @param objClass
-     * @param id
-     * @return
-     */
-    public Object findNoLazyObject(Class objClass, Serializable id);
-
-    /**
-     * 非延时加载查询对象,若对象中加了元数据类型(HibernateNoLazyBean)
-     * 或对象中某个属性对象加入了元数据类型(HibernateNoLazyProperty)
-     * 就可以获得非延时加载该对象下面的属性对象,支持嵌套属性对象
-     * @param objClass
-     * @param id
-     * @return
-     */
-    public Object lookNoLazyObject(final Class objClass, final Serializable id);
-
-    /**
-     * 深度非延时加载查询对象,若对象中加了元数据类型(HibernateNoLazyBean)
-     * 或对象中某个属性对象加入了元数据类型(HibernateNoLazyProperty)
-     * 就可以获得非延时加载该对象下面的属性对象,支持嵌套属性对象
-     * @param objClass
-     * @param id
-     * @return
-     */
-    public Object lookDepthNoLazyObject(final Class objClass, final Serializable id);
 
     public Object refreshCache();
 
@@ -222,13 +137,6 @@ public interface IGenericService {
      * @param list
      */
     public void loadCollectionPropertyBean(Collection list);
-
-    /**
-     * 先生成对象主键id的值，再保存对象
-     * @param obj 包括主键值
-     * @return
-     */
-    public Object saveAutoIdObject(Object obj);
 
     /**
      * 执行报表的sql语句，并返回所有查询结果数据集

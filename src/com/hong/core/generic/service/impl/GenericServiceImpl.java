@@ -31,23 +31,8 @@ public class GenericServiceImpl implements IGenericService {
     }
 
     @Override
-    public List executeNoLazyObjectSql(String sql, int position, int length) {
-        return genericDao.executeNoLazyObjectSql(sql, position, length);
-    }
-
-    @Override
     public List<String[]> executeSql(String sql, int position, int length) {
         return genericDao.executeSql(sql, position, length);
-    }
-
-    @Override
-    public List<String[]> executeSql(String sql, int position, int length, Map fieldsMap) {
-        return genericDao.executeSql(sql, position, length, fieldsMap);
-    }
-
-    @Override
-    public List<String[]> executeSql(String sql, Map fieldsMap) {
-        return genericDao.executeSql(sql, fieldsMap);
     }
 
     @Override
@@ -61,27 +46,17 @@ public class GenericServiceImpl implements IGenericService {
     }
 
     @Override
-    public List executeNoLazyObjectSql(String hql) {
-        return genericDao.executeNoLazyObjectSql(hql);
-    }
-
-    @Override
-    public List executeDepthNoLazyObjectSql(String hql) {
-        return genericDao.executeDepthNoLazyObjectSql(hql);
-    }
-
-    @Override
     public boolean execute(String sql) throws Exception {
         return genericDao.execute(sql);
     }
 
     @Override
-    public int getSqlRecordCount(String sql) {
+    public long getSqlRecordCount(String sql) {
         return genericDao.getSqlRecordCount(sql);
     }
 
     @Override
-    public int getObjectSqlRecordCount(String hql) {
+    public long getObjectSqlRecordCount(String hql) {
         return genericDao.getObjectSqlRecordCount(hql);
     }
 
@@ -101,7 +76,7 @@ public class GenericServiceImpl implements IGenericService {
     }
 
     @Override
-    public boolean batchExecuteHql(String hql) {
+    public int batchExecuteHql(String hql) {
         return genericDao.batchExecuteHql(hql);
     }
 
@@ -116,38 +91,13 @@ public class GenericServiceImpl implements IGenericService {
     }
 
     @Override
-    public boolean deleteObject(String hql) {
+    public boolean deleteObjectHql(String hql) {
         return genericDao.deleteObject(hql);
     }
 
     @Override
     public Object lookUp(Class objectClass, Serializable id) {
         return genericDao.lookUp(objectClass, id);
-    }
-
-    @Override
-    public Object findNoLazyObject(Class objClass, Serializable id, String[] setFieldNames) {
-        return genericDao.findNoLazyObject(objClass, id, setFieldNames);
-    }
-
-    @Override
-    public Object findNoLazyObject(Class objClass, Serializable id, String methodName) {
-        return genericDao.findNoLazyObject(objClass, id, methodName);
-    }
-
-    @Override
-    public Object findNoLazyObject(Class objClass, Serializable id) {
-        return genericDao.findNoLazyObject(objClass, id);
-    }
-
-    @Override
-    public Object lookNoLazyObject(Class objClass, Serializable id) {
-        return genericDao.lookDepthNoLazyObject(objClass, id);
-    }
-
-    @Override
-    public Object lookDepthNoLazyObject(Class objClass, Serializable id) {
-        return genericDao.lookDepthNoLazyObject(objClass, id);
     }
 
     @Override
@@ -163,13 +113,6 @@ public class GenericServiceImpl implements IGenericService {
     @Override
     public void loadCollectionPropertyBean(Collection list) {
         genericDao.loadCollectionPropertyBean(list);
-    }
-
-    @Override
-    public Object saveAutoIdObject(Object obj) {
-        String tableBeanClassName = obj.getClass().getName();
-
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -214,16 +157,16 @@ public class GenericServiceImpl implements IGenericService {
 
     @Override
     public List getTableSchemas() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return genericDao.getTableSchemas();
     }
 
     @Override
     public List getTablesInSchema(String schema) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return genericDao.getTablesInSchema(schema);
     }
 
     @Override
     public List getColumnsInTable(String table) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return genericDao.getColumnsInTable(table);  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

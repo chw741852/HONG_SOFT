@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>查询生成器</title>
-    <link rel="stylesheet" type="text/css" href="${rc.contextPath}/css/table.css">
+    <link id="tableTheme" rel="stylesheet" type="text/css" href="${rc.contextPath}/css/themes/default/table.css">
     <link rel="stylesheet" type="text/css" href="${rc.contextPath}/css/form.css">
     <link id="easyuiTheme" rel="stylesheet" type="text/css" href="${rc.contextPath}/js/easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="${rc.contextPath}/js/easyui/themes/icon.css">

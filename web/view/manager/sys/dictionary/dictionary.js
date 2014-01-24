@@ -5,7 +5,10 @@
  * Time: 下午1:32
  * To change this template use File | Settings | File Templates.
  */
-function ScriptUtil() {}
+function ScriptUtil() {
+    var url = "";
+    var flag = "";
+}
 
 ScriptUtil.prototype = {
     beforeDrag:function(treeId, treeNodes) {
@@ -25,6 +28,7 @@ ScriptUtil.prototype = {
                 $('#dictId').val(result.id);
                 $('#dictSequence').html(result.sequence);
                 $('#dictName').html(result.name);
+                $('#dictKey').html(result.key);
                 $('#parentNode').html(result.parentNode);
 
                 $('#dg').datagrid('load', {id:result.id});
@@ -34,7 +38,7 @@ ScriptUtil.prototype = {
     add:function() {
         $('#dictForm')[0].reset();
         $('#id').val('');
-        $('#parentId').combotree('reload', contextPath + "/manager/sys/dictionary/ajaxFindModule?id=0");
+        $('#parentId').combotree('reload', contextPath + "/manager/sys/dictionary/ajaxFindDict?id=0");
         var zTree = $.fn.zTree.getZTreeObj("dictTree"),
             nodes = zTree.getSelectedNodes(),
             treeNode = nodes[0];
@@ -59,7 +63,7 @@ ScriptUtil.prototype = {
                 dataType: "json",
                 success: function(result) {
                     if (result.id > 0) {
-                        $('#moduleForm')[0].reset();
+                        $('#dictForm')[0].reset();
                         $('#id').val(result.id);
                         $('#version').val(result.version);
                         $('#sequence').numberspinner('setValue', result.sequence);
@@ -123,6 +127,83 @@ ScriptUtil.prototype = {
                         }
                     }
                 });
+            }
+        });
+    },
+    saveDict:function() {
+        var _this = this;
+        $('#dictForm').form('submit',{
+            url: _this.url,
+            onSubmit: function() {
+                if ($(this).form('validate') == true) {
+                    $.ajax({
+                        url: contextPath + '/manager/sys/dictionary/checkKey',
+                        data: "key=" + $('#key').val(),
+                        dataType: 'json',
+                        success:function(result) {
+                            if (result.flag == false) {
+                                _this.showMsg(result.msg);
+                            }
+                            return result.flag;
+                        }
+                    });
+                } else {
+                    return false;
+                }
+            },
+            success: function(result) {
+                var result = eval('(' + result + ')');
+                $('#dlg').dialog('close');
+
+                if (result.bean.id > 0) {
+                    var zTree = $.fn.zTree.getZTreeObj("dictTree"),
+                        nodes = zTree.getNodesByParam('id', null);
+                    if (result.bean.parent != null) {
+                        nodes = zTree.getNodesByParam('id', result.bean.parent.id)
+                    }
+                    var treeNode = nodes[0];
+                    if (_this.flag == "add") {
+                        if (treeNode) {
+                            zTree.addNodes(treeNode, {id:result.bean.id, pId:treeNode.id, name:result.bean.name});
+                        } else {
+                            zTree.addNodes(null, {id:result.bean.id, pId:0, name:result.bean.name});
+                        }
+                    } else {
+                        nodes = zTree.getNodesByParam('id', result.bean.id);
+                        var sourceNode = nodes[0];
+                        zTree.editName(sourceNode);
+                        zTree.cancelEditName(result.bean.name);
+                        if (treeNode) {
+                            zTree.moveNode(treeNode, sourceNode, 'inner');
+                        } else {
+                            zTree.moveNode(null, sourceNode, 'inner');
+                        }
+                        $('#dictId').val(result.bean.id);
+                        $('#dictSequence').html(result.bean.sequence);
+                        $('#dictKey').html(result.bean.key);
+                        $('#dictName').html(result.bean.name);
+                        $('#parentNode').html(result.bean.parent.name);
+
+                        $('#dg').datagrid('load', {id:result.id});
+                    }
+                }
+
+                $('#parentId').combotree('reload');
+                _this.showMsg(result.message);
+            }
+        });
+    },
+    showMsg:function(msg) {
+        $.messager.show({
+            title:'提示',
+            msg:msg,
+            showType:'show',
+            timeout:2500,
+            style:{
+                left:'',
+                right:0,
+                top:document.body.scrollTop+document.documentElement.scrollTop,
+                bottom:''
             }
         });
     }

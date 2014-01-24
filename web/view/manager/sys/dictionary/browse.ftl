@@ -47,13 +47,6 @@
 
         var zNodes = ${nodes!""}
 
-        function setEasyUiWidth(width) {
-            var parentWidth = $(".combotree").eq(0).parent().width();
-            $(".combotree,.numberspinner").css("width", parentWidth * width);
-        }
-
-        setEasyUiWidth(0.85);
-
         $(function(){
             scriptTools.setTheme($("#easyuiTheme"), "themes", $.cookie("themeName"), "default", "easyui.css");
             scriptTools.setTheme($("#tableTheme"), "themes", $.cookie("themeName"), "default", "table.css");
@@ -79,8 +72,8 @@
         <tr>
             <td colspan="4">字典表管理</td>
         </tr>
-        </thead>
         <tbody>
+        </thead>
         <tr>
             <td class="fieldtitle">序 号：</td>
             <td class="fieldinput"><div id="dictSequence"></div></td>
@@ -105,7 +98,15 @@
     <div style="width: 99%; margin: 4px 4px;" id="divWidth">
         <div class="easyui-tabs">
             <div title="键值对列表">
-
+                <table class="easyui-datagrid" title="" style="margin: 2px auto;" id="codeDg"
+                       data-options="singleSelect:true, collapsible:true, fitColumns:true, rownumbers:true,
+                    toolbar: '#tb', url: '${rc.contextPath}/manager/sys/dictionary/loadCodeRow'">
+                    <thead>
+                    <th data-options="field:'id', width:$(this).width()*0.33, editor: 'text'">id</th>
+                    <th data-options="field:'number', width:$(this).width()*0.33, editor: 'text'">键</th>
+                    <th data-options="field:'name', width:$(this).width()*0.33, editor: 'text'">值</th>
+                    </thead>
+                </table>
             </div>
             <div title="子节点列表">
                 <table class="easyui-datagrid" title="" style="margin: 2px auto;" id="dg"
@@ -150,7 +151,7 @@
                     <td class="fieldtitle">父节点：</td>
                     <td class="fieldinput">
                         <input name="parentId" class="combotree easyui-combotree" id="parentId"
-                               data-options="url: '${rc.contextPath}/manager/sys/module/ajaxFindModule?id=0',
+                               data-options="url: '${rc.contextPath}/manager/sys/dictionary/findComboTreeDict?id=0',
                             method:'get', required:false, multiple:false">
                         <a href="javascript:void(0);" onclick="$('#parentId').combotree('setValue','');"
                            style="text-decoration: none;">清空</a>
@@ -158,7 +159,7 @@
                 </tr>
             </table>
             <div class="ffoot">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="scriptInstance.saveModule();">提 交</a>&nbsp;&nbsp;
+                <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="scriptInstance.saveDict();">提 交</a>&nbsp;&nbsp;
                 <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="$('#dlg').dialog('close');">取 消</a>
             </div>
         </form>
@@ -177,5 +178,14 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="easyuiInstance.save()">保 存</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="easyuiInstance.reject()">取 消</a>
 </div>
+
+<script type="text/javascript">
+    function setEasyUiWidth(width) {
+        var parentWidth = $(".combotree").eq(0).parent().width();
+        $(".combotree,.numberspinner").css("width", parentWidth * width);
+    }
+
+    setEasyUiWidth(0.85);
+</script>
 </body>
 </html>

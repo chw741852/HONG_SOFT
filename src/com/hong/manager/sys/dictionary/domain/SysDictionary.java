@@ -33,6 +33,9 @@ public class SysDictionary extends IdEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "sysDictionary")
     private Set<SysCode> sysCodes = new HashSet<SysCode>();     // 从表
 
+    @Transient
+    private Long parentId;
+
     public String getName() {
         return name;
     }
@@ -79,5 +82,13 @@ public class SysDictionary extends IdEntity {
 
     public void setSysCodes(Set<SysCode> sysCodes) {
         this.sysCodes = sysCodes;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 }

@@ -7,12 +7,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate4.SessionFactoryUtils;
-import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.io.Serializable;
@@ -45,56 +42,58 @@ public class GenericDaoImpl implements IGenericDao {
     // 取得JDBC连接
     private Connection getConnection() {
         Session hibernateSession = em.unwrap(Session.class);
+
         try {
             return SessionFactoryUtils.getDataSource(hibernateSession.getSessionFactory()).getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            log.error(e.getMessage());
         }
+
+        return null;
     }
 
     @Override
-    public int getSqlRecordCount(String sql) {
+    public long getSqlRecordCount(String sql) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        int count = 0;
         Connection connection = getConnection();
-
+        long count = 0;
+        
         try {
             ps = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             rs = ps.executeQuery();
             while (rs.next()) {
-                count = rs.getInt(1);
+                count = rs.getLong(1);
             }
-        } catch (Exception e) {
-            log.error("error execute: " + sql);
-            log.error(e.getMessage());
+        } catch (SQLException e) {
             e.printStackTrace();
+            log.error(e.getMessage());
+            log.error(sql);
         } finally {
-            try {
-                if (rs != null) rs.close();
+            if (rs != null) try {
+                rs.close();
                 if (ps != null) ps.close();
                 if (connection != null) connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                log.error(e.getMessage());
+                log.error(sql);
             }
         }
-        return count;  //To change body of implemented methods use File | Settings | File Templates.
+
+        return count;
     }
 
     @Override
-    public int getObjectSqlRecordCount(String hql) {
+    public long getObjectSqlRecordCount(String hql) {
         List lt = executeObjectSql(hql, 0 , 0);
         if (lt != null && lt.size() > 0) {
-            if (lt.get(0) instanceof Integer) {
-                return ((Integer)lt.get(0)).intValue();
-            } else {
-                return ((Long)lt.get(0)).intValue();
-            }
+            return ((Long)lt.get(0)).longValue();
         }
 
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return 0;
     }
 
     @Override
@@ -110,46 +109,10 @@ public class GenericDaoImpl implements IGenericDao {
     }
 
     @Override
-    public List executeNoLazyObjectSql(String sql, int position, int length) {
-
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List executeNoLazyObjectSql(String hql, int position, int length, String[] methodNames) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List executeNoLazyObjectSql(String hql, int position, int length, String methodName) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
     public List executeObjectSql(String hql) {
         Query query = em.createQuery(hql);
 
         return query.getResultList();
-    }
-
-    @Override
-    public List executeNoLazyObjectSql(String hql) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List executeDepthNoLazyObjectSql(String hql) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List executeNoLazyObjectSql(String hql, String[] methodNames) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List executeNoLazyObjectSql(String hql, String methodName) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -160,8 +123,6 @@ public class GenericDaoImpl implements IGenericDao {
         Connection connection = getConnection();
 
         try {
-            if (getConnection().isClosed())
-                return lt;
             ps = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             ps.setQueryTimeout(PublicConstants.TIME_OUT);
@@ -192,9 +153,9 @@ public class GenericDaoImpl implements IGenericDao {
                 }
             }
         } catch (SQLException e) {
-            log.error("error execute: " + sql);
-            log.error(e.getMessage());
             e.printStackTrace();
+            log.error(e.getMessage());
+            log.error(sql);
         } finally {
             try {
                 if (rs != null) rs.close();
@@ -202,78 +163,12 @@ public class GenericDaoImpl implements IGenericDao {
                 if (connection != null) connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                log.error(e.getMessage());
+                log.error(sql);
             }
         }
 
         return lt;
-    }
-
-    @Override
-    public List executeSql(final String sql, final int position, final int length, final Map fieldsMap) {
-//        List lt = new ArrayList();
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//
-//        try {
-//            if (getConnection().isClosed() == true)
-//                return lt;
-//            ps = getConnection().prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-//                    ResultSet.CONCUR_READ_ONLY);
-//            rs = ps.executeQuery();
-//
-//            int cols = rs.getMetaData().getColumnCount();
-//            if (fieldsMap != null) {
-//                for (int i=0; i<cols; i++) {
-//                    TableColumnInfo tableColumnInfo = new TableColumnInfo();
-//                    tableColumnInfo.setFieldIndex(new Integer(i));
-//                    tableColumnInfo.setFieldName(rs.getMetaData().getColumnName(i + 1));
-//                    tableColumnInfo.setFieldType(rs.getMetaData().getColumnTypeName(i + 1));
-//                    tableColumnInfo.setFieldSize(rs.getMetaData().getColumnDisplaySize(i + 1));
-//                    fieldsMap.put(tableColumnInfo.getFieldName(), tableColumnInfo);
-//                }
-//                if (position != 0 && length != 0) {
-//                    int n = 1;
-//                    if (rs.absolute(position + 1)) {
-//                        while (n <= length) {
-//                            String[] recordArray = new String[cols];
-//                            for (int i = 1; i <= cols; i++) {
-//                                recordArray[i - 1] = ((rs.getString(i) == null ? "" : rs.getString(i)));
-//                            }
-//                            lt.add(recordArray);
-//                            n++;
-//                            if (rs.isLast())    break;
-//                            rs.next();
-//                        }
-//                    }
-//                } else {
-//                    while (rs.next()) {
-//                        String[] recordArray = new String[cols];
-//                        for (int i = 1; i <= cols; i++) {
-//                            recordArray[i - 1] = ((rs.getString(i) == null ? "" : rs.getString(i)));
-//                        }
-//                        lt.add(recordArray);
-//                    }
-//                }
-//            }
-//        } catch (SQLException e) {
-//            log.error("error execute: " + sql);
-//            log.error(e.getMessage());
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (rs != null) rs.close();
-//                if (ps != null) ps.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List executeSql(String sql, Map fieldsMap) {
-        return executeSql(sql, 0, 0, fieldsMap);
     }
 
     @Override
@@ -286,22 +181,26 @@ public class GenericDaoImpl implements IGenericDao {
         PreparedStatement ps = null;
         boolean result = false;
         Connection connection = getConnection();
+
         try {
             ps = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             result = ps.execute();
         } catch (SQLException e) {
-            log.error("error execute: " + sql);
-            log.error(e.getMessage());
             e.printStackTrace();
+            log.error(e.getMessage());
+            log.error(sql);
         } finally {
             try {
                 if (ps != null) ps.close();
                 if (connection != null) connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                log.error(e.getMessage());
+                log.error(sql);
             }
         }
+
         return result;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
@@ -318,50 +217,32 @@ public class GenericDaoImpl implements IGenericDao {
 
     @Override
     public boolean deleteObject(Object obj) {
-        boolean result = false;
-        try {
-            em.remove(obj);
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        em.remove(obj);
+        return true;
+    }
+
+    @Override
+    public int batchExecuteHql(String hql) {
+        int result = 0;
+
+        Query query = em.createQuery(hql);
+        query.setHint("org.hibernate.cacheable", true);
+        result = query.executeUpdate();
+
         return result;
     }
 
     @Override
-    public boolean batchExecuteHql(String hql) {
-        boolean result = false;
-        try {
+    public int deleteObjectHql(String hql) {
+        int result = 0;
+        if (hql.indexOf("delete") >= 0) {
             Query query = em.createQuery(hql);
-            query.setHint("org.hibernate.cacheable", true);
-            query.executeUpdate();
-            em.flush();
-            result = true;
-        } catch (Exception e) {
-            log.error("error execute: " + hql);
-            log.error(e.getMessage());
-            e.printStackTrace();
+            result = query.executeUpdate();
+        } else {
+            Query query = em.createQuery(" delete from " + hql);
+            result = query.executeUpdate();
         }
-        return result;
-    }
 
-    @Override
-    public boolean deleteObject(String sql) {
-        boolean result = false;
-        try {
-            if (sql.indexOf("delete") >= 0) {
-                Query query = em.createQuery(sql);
-                query.executeUpdate();
-            } else {
-                Query query = em.createQuery(" delete from " + sql);
-                query.executeUpdate();
-            }
-            result = true;
-        } catch (Exception e) {
-            log.error("error execute: " + sql);
-            log.error(e.getMessage());
-            e.printStackTrace();
-        }
         return result;
     }
 
@@ -399,39 +280,6 @@ public class GenericDaoImpl implements IGenericDao {
         return null;
     }
 
-    /**
-     * 根据传递进来的setFieldNames数组决定需要延时加载哪些子表类
-     *
-     * @param objClass
-     * @param mainId        --主表Id
-     * @param setFieldNames
-     * @return
-     */
-    @Override
-    public Object findNoLazyObject(Class objClass, Serializable mainId, String[] setFieldNames) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public Object findNoLazyObject(Class objClass, Serializable mainId, String methodName) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public Object findNoLazyObject(Class objClass, Serializable mainId) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public Object lookNoLazyObject(Class objClass, Serializable mainId) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public Object lookDepthNoLazyObject(Class objClass, Serializable mainId) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
     @Override
     public Object refreshCache() {
         em.flush();
@@ -455,6 +303,7 @@ public class GenericDaoImpl implements IGenericDao {
         ResultSet rs = null;
         List<Object[]> lt = new ArrayList<Object[]>();
         Connection connection = getConnection();
+
         try {
             ps = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
@@ -486,11 +335,10 @@ public class GenericDaoImpl implements IGenericDao {
                     lt.add(recordArray);
                 }
             }
-        } catch (Exception e) {
-            em.close();
-            log.error("error execute: " + sql);
-            log.error(e.getMessage());
+        } catch (SQLException e) {
             e.printStackTrace();
+            log.error(e.getMessage());
+            log.error(sql);
         } finally {
             try {
                 if (rs != null) rs.close();
@@ -498,9 +346,12 @@ public class GenericDaoImpl implements IGenericDao {
                 if (connection != null) connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                log.error(e.getMessage());
+                log.error(sql);
             }
         }
-        return lt;  //To change body of implemented methods use File | Settings | File Templates.
+
+        return lt;
     }
 
     @Override
@@ -509,9 +360,8 @@ public class GenericDaoImpl implements IGenericDao {
         ResultSet rs = null;
         List<Map> lt = new ArrayList<Map>();
         Connection connection = getConnection();
+
         try {
-            if (connection.isClosed())
-                return lt;
             ps = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
             rs = ps.executeQuery();
@@ -545,10 +395,10 @@ public class GenericDaoImpl implements IGenericDao {
                     lt.add(record);
                 }
             }
-        } catch (Exception e) {
-            log.error("error execute: " + sql);
-            log.error(e.getMessage());
+        } catch (SQLException e) {
             e.printStackTrace();
+            log.error(e.getMessage());
+            log.error(sql);
         } finally {
             try {
                 if (rs != null) rs.close();
@@ -556,6 +406,8 @@ public class GenericDaoImpl implements IGenericDao {
                 if (connection != null) connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                log.error(e.getMessage());
+                log.error(sql);
             }
         }
 
@@ -567,24 +419,26 @@ public class GenericDaoImpl implements IGenericDao {
         ResultSet rs = null;
         List lt = new ArrayList();
         Connection connection = getConnection();
+
         try {
-            if (connection.isClosed() == true)
-                return lt;
             rs = connection.getMetaData().getSchemas();
             while (rs.next()) {
                 String tableName = rs.getString(1);
                 lt.add(tableName);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+            log.error(e.getMessage());
         } finally {
             try {
                 if (rs != null) rs.close();
                 if (connection != null) connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                log.error(e.getMessage());
             }
         }
+
         return lt;
     }
 
@@ -593,12 +447,13 @@ public class GenericDaoImpl implements IGenericDao {
         ResultSet rs = null;
         List lt = new ArrayList();
         Connection connection = getConnection();
+
+        DatabaseMetaData dbmd = null;
+        String dbName = (String) ReflectUtils.getFieldValue(dbmd, "database");
+        String[] types = {"TABLE"};
+
         try {
-            if (connection.isClosed())
-                return lt;
-            DatabaseMetaData dbmd = connection.getMetaData();
-            String dbName = (String) ReflectUtils.getFieldValue(dbmd, "database");
-            String[] types = {"TABLE"};
+            dbmd = connection.getMetaData();
             rs = dbmd.getTables(null, null, "%", types);
             while (rs.next()) {
                 String tableName = rs.getString(3);
@@ -608,16 +463,19 @@ public class GenericDaoImpl implements IGenericDao {
                 }
                 lt.add(tableName);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+            log.error(e.getMessage());
         } finally {
             try {
                 if (rs != null) rs.close();
                 if (connection != null) connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
+                log.error(e.getMessage());
             }
         }
+
         return lt;
     }
 
