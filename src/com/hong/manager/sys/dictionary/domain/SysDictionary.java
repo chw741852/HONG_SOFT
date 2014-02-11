@@ -28,9 +28,9 @@ public class SysDictionary extends IdEntity {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "parentId")
     private SysDictionary parent;   // 父节点
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "parent")
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "parent")
     private Set<SysDictionary> children = new HashSet<SysDictionary>(); // 子节点
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "sysDictionary")
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "sysDictionary")
     private Set<SysCode> sysCodes = new HashSet<SysCode>();     // 从表
 
     @Transient

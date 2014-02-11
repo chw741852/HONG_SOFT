@@ -101,7 +101,7 @@
     <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!-- 配置全局异常处理 -->
-    <bean id="exceptionResolver" class="com.hong.core.exception.GlobelException"/>
+    <bean id="exceptionResolver" class="com.hong.core.exception.GlobalException"/>
     <!-- freemarker配置 -->
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/view/"/>

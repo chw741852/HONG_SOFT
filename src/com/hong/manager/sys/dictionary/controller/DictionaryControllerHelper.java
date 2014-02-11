@@ -1,12 +1,14 @@
 package com.hong.manager.sys.dictionary.controller;
 
 import com.hong.core.generic.service.IGenericService;
+import com.hong.manager.sys.dictionary.domain.SysDictionary;
 import org.apache.commons.logging.Log;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by hong on 14-1-18 下午6:33.
@@ -30,21 +32,15 @@ public class DictionaryControllerHelper {
         }
     }
 
-    // TODO 暂不用
-    public void printJson(String json, HttpServletResponse response, Log log) {
-        try {
-            response.getWriter().print(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
+    public boolean deleteObjects(SysDictionary parent) {
+        if (parent.getChildren().size() > 0) {
+            for (SysDictionary child:parent.getChildren()) {
+                if (!deleteObjects(child))
+                    return false;
             }
+            return genericService.deleteObject(parent);
+        } else {
+            return genericService.deleteObject(parent);
         }
     }
 }

@@ -36,7 +36,7 @@ public class SysModule extends IdEntity{
     @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(name = "parentId")
     private SysModule parent;    // 父模块ID
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "parent")
+    @OneToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy = "parent")
     private Set<SysModule> children = new HashSet<SysModule>();       // 子模块
 
     public SysModule getParent() {

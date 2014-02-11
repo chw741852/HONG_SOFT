@@ -4,6 +4,6 @@
   <title>Exception</title>
 </head>
 <body>
-    异常：${exception.message}
+    异常：${(exception.message)!""}
 </body>
 </html>

@@ -32,16 +32,15 @@ public class SysModuleControllerHelper {
         }
     }
 
-    public boolean deleteChildren(SysModule sysModule) {
-        String hql = "from " + SysModule.class.getName() + " a where a.parentId=" + sysModule.getId();
-        List<SysModule> childNodes = genericService.executeObjectSql(hql);
-        if (childNodes != null && childNodes.size() > 0) {
-            for(SysModule child:childNodes) {
-                if(deleteChildren(child) == false) {
+    public boolean deleteObjects(SysModule parent) {
+        if (parent.getChildren().size() > 0) {
+            for (SysModule child:parent.getChildren()) {
+                if (!deleteObjects(child))
                     return false;
-                }
             }
+            return genericService.deleteObject(parent);
+        } else {
+            return genericService.deleteObject(parent);
         }
-        return genericService.deleteObject(sysModule);
     }
 }

@@ -12,6 +12,7 @@
     <script type="text/javascript" src="${rc.contextPath}/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="${rc.contextPath}/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="${rc.contextPath}/js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/easyui/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="${rc.contextPath}/js/ztree/js/jquery.ztree.core-3.5.min.js"></script>
     <script type="text/javascript" src="${rc.contextPath}/js/ztree/js/jquery.ztree.exedit-3.5.min.js"></script>
     <script type="text/javascript" src="${rc.contextPath}/js/ztree/js/jquery.ztree.excheck-3.5.min.js"></script>
@@ -40,7 +41,7 @@
         </div>
 </div>
 
-<div data-options="region:'center'" style="overflow: hidden;">
+<div data-options="region:'center'" style="overflow: auto;">
     <table cellpadding="0" cellspacing="0" class="table1">
         <thead>
         <tr>
@@ -89,9 +90,9 @@
         <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="scriptInstance.edit();">修 改</a>&nbsp;&nbsp;
         <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="scriptInstance.remove();">删 除</a>
     </div>
-    <div style="width: 99%; margin: 4px 4px;">
+    <div style="width: 100%; margin: 4px 4px;">
         <table class="easyui-datagrid" title="子节点列表" style="margin: 2px auto;" id="dg"
-               data-options="singleSelect:true, collapsible:true, fitColumns:true, rownumbers:true,
+               data-options="singleSelect:true, fitColumns:true, rownumbers:true,
                 toolbar: '#tb', onLoadSuccess:easyuiInstance.onLoadSuccess,
                 url:'${rc.contextPath}/manager/sys/module/loadChildNode', method:'get'">
             <thead>
@@ -135,12 +136,12 @@
                     <td class="fieldtitle">序号：</td>
                     <td class="fieldinput">
                         <input name="sequence" id="sequence" class="numberspinner easyui-numberspinner"
-                               data-options="required:true, min:0, missingMessage:'该字段不能为空！'">
+                               data-options="required:true, min:0">
                     </td>
                     <td class="fieldtitle">名称：</td>
                     <td class="fieldinput">
                         <input name="name" id="name" class="inputtxt easyui-validatebox"
-                               data-options="required:true,missingMessage:'该字段不能为空！'">
+                               data-options="required:true">
                     </td>
                 </tr>
                 <tr>

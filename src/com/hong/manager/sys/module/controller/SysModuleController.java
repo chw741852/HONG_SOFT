@@ -66,7 +66,7 @@ public class SysModuleController {
 
         String json = JSON.toJSONString(sysModule);
         try {
-            response.getWriter().write(JSON.toJSONString(json));
+            response.getWriter().write(json);
             response.getWriter().flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -120,7 +120,7 @@ public class SysModuleController {
 
         String json = JSON.toJSONString(result);
         try {
-            response.getWriter().write(JSON.toJSONString(json));
+            response.getWriter().write(json);
             response.getWriter().flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -151,7 +151,7 @@ public class SysModuleController {
 
         String json = JSON.toJSONString(result);
         try {
-            response.getWriter().write(JSON.toJSONString(json));
+            response.getWriter().write(json);
             response.getWriter().flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -191,7 +191,7 @@ public class SysModuleController {
 
         String json = JSON.toJSONString(result);
         try {
-            response.getWriter().write(JSON.toJSONString(json));
+            response.getWriter().write(json);
             response.getWriter().flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -222,7 +222,7 @@ public class SysModuleController {
 
         String json = JSON.toJSONString(result);
         try {
-            response.getWriter().write(JSON.toJSONString(json));
+            response.getWriter().write(json);
             response.getWriter().flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -249,7 +249,7 @@ public class SysModuleController {
 
         String json = JSON.toJSONString(sysModule);
         try {
-            response.getWriter().write(JSON.toJSONString(json));
+            response.getWriter().write(json);
             response.getWriter().flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -273,7 +273,7 @@ public class SysModuleController {
         SysModule sysModule = (SysModule)genericService.lookUp(SysModule.class, Long.parseLong(id));
 
         SysModuleControllerHelper helper = new SysModuleControllerHelper(genericService);
-        flag = helper.deleteChildren(sysModule);
+        flag = helper.deleteObjects(sysModule);
 
         try {
             response.getWriter().print(flag);

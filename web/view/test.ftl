@@ -4,11 +4,12 @@
 <head>
     <title>测试Freemarker</title>
     <link type="text/css" rel="stylesheet" href="${rc.contextPath}/css/front.css">
-    <link id="easyuiTheme" rel="stylesheet" type="text/css" href="${rc.contextPath}/js/easyui/themes/default/easyui.css">
+    <link id="easyuiTheme" rel="stylesheet" type="text/css" href="${rc.contextPath}/js/easyui/themes/metro-red/easyui.css">
     <link rel="stylesheet" type="text/css" href="${rc.contextPath}/js/easyui/themes/icon.css">
 
     <script type="text/javascript" src="${rc.contextPath}/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="${rc.contextPath}/js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/easyui/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
 <div class="nav"></div>
@@ -51,6 +52,6 @@
     <th data-options="field:'id'"></th>
     </thead>
 </table>
-
+<input class="easyui-validatebox" data-options="required:true" />
 </body>
 </html>

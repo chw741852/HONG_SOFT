@@ -1,180 +1,40 @@
-2014-01-20 23:27:13,739  WARN [net.sf.ehcache.config.ConfigurationFactory:134] - No configuration found. Configuring ehcache from ehcache-failsafe.xml  found in the classpath: jar:file:/E:/Workspaces/IdeaGitHub/HONG_SOFT/out/artifacts/HONG_SOFT_war_exploded/WEB-INF/lib/ehcache-core-2.4.3.jar!/ehcache-failsafe.xml
-2014-01-20 23:27:14,098  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.spi.UpdateTimestampsCache]; using defaults.
-2014-01-20 23:27:14,178  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.internal.StandardQueryCache]; using defaults.
-2014-01-20 23:27:14,612  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.queryModule.domain.SysField]; using defaults.
-2014-01-20 23:27:14,993  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.queryModule.domain.SysListLink]; using defaults.
-2014-01-20 23:27:15,011  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.dictionary.domain.SysDictionary]; using defaults.
-2014-01-20 23:27:15,044  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Resource]; using defaults.
-2014-01-20 23:27:15,078  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.module.domain.SysModule]; using defaults.
-2014-01-20 23:27:15,103  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Role]; using defaults.
-2014-01-20 23:27:15,118  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.queryModule.domain.SysQueryModule]; using defaults.
-2014-01-20 23:27:15,139  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.dictionary.domain.SysCode]; using defaults.
-2014-01-20 23:27:15,156  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Authority]; using defaults.
-2014-01-20 23:27:26,102  WARN [com.hong.core.security.support.FilterSecurityInterceptorSupport:141] - Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
-2014-01-20 23:27:42,767  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.web.controller.HomeController.home 方法开始执行！
-2014-01-20 23:27:42,843  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.web.controller.HomeController.home 方法耗时84毫秒！
-2014-01-20 23:27:42,844  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.web.controller.HomeController.home 方法执行结束！
-2014-01-20 23:27:43,796  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法开始执行！
-2014-01-20 23:27:44,494  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法耗时698毫秒！
-2014-01-20 23:27:44,494  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法执行结束！
-2014-01-20 23:27:46,856  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法开始执行！
-2014-01-20 23:27:46,942  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法耗时86毫秒！
-2014-01-20 23:27:46,942  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法执行结束！
-2014-01-20 23:27:47,636  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.module.controller.SysModuleController.ajaxFindModule 方法开始执行！
-2014-01-20 23:27:48,067  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法开始执行！
-2014-01-20 23:27:48,122  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.module.controller.SysModuleController.ajaxFindModule 方法耗时486毫秒！
-2014-01-20 23:27:48,123  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.module.controller.SysModuleController.ajaxFindModule 方法执行结束！
-2014-01-20 23:27:48,201  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法耗时134毫秒！
-2014-01-20 23:27:48,202  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法执行结束！
-2014-01-20 23:29:20,297  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.web.controller.HomeController.home 方法开始执行！
-2014-01-20 23:29:20,297  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.web.controller.HomeController.home 方法耗时1毫秒！
-2014-01-20 23:29:20,298  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.web.controller.HomeController.home 方法执行结束！
-2014-01-20 23:29:20,435  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法开始执行！
-2014-01-20 23:29:20,597  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法耗时163毫秒！
-2014-01-20 23:29:20,598  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法执行结束！
-2014-01-20 23:30:31,137  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.web.controller.HomeController.home 方法开始执行！
-2014-01-20 23:30:31,138  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.web.controller.HomeController.home 方法耗时1毫秒！
-2014-01-20 23:30:31,138  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.web.controller.HomeController.home 方法执行结束！
-2014-01-20 23:30:31,315  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法开始执行！
-2014-01-20 23:30:31,564  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法耗时249毫秒！
-2014-01-20 23:30:31,565  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法执行结束！
-2014-01-20 23:39:27,611  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法开始执行！
-2014-01-20 23:39:27,758  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法耗时147毫秒！
-2014-01-20 23:39:27,759  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法执行结束！
-2014-01-20 23:39:27,969  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.module.controller.SysModuleController.ajaxFindModule 方法开始执行！
-2014-01-20 23:39:28,043  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.module.controller.SysModuleController.ajaxFindModule 方法耗时74毫秒！
-2014-01-20 23:39:28,044  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.module.controller.SysModuleController.ajaxFindModule 方法执行结束！
-2014-01-20 23:39:28,245  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法开始执行！
-2014-01-20 23:39:28,259  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法耗时14毫秒！
-2014-01-20 23:39:28,260  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法执行结束！
-2014-01-20 23:39:32,490  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:39:32,512  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时22毫秒！
-2014-01-20 23:39:32,513  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:43:41,879  WARN [net.sf.ehcache.config.ConfigurationFactory:134] - No configuration found. Configuring ehcache from ehcache-failsafe.xml  found in the classpath: jar:file:/E:/Workspaces/IdeaGitHub/HONG_SOFT/out/artifacts/HONG_SOFT_war_exploded/WEB-INF/lib/ehcache-core-2.4.3.jar!/ehcache-failsafe.xml
-2014-01-20 23:43:42,155  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.spi.UpdateTimestampsCache]; using defaults.
-2014-01-20 23:43:42,238  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.internal.StandardQueryCache]; using defaults.
-2014-01-20 23:43:42,586  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.queryModule.domain.SysField]; using defaults.
-2014-01-20 23:43:42,877  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.queryModule.domain.SysListLink]; using defaults.
-2014-01-20 23:43:42,897  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.dictionary.domain.SysDictionary]; using defaults.
-2014-01-20 23:43:42,921  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Resource]; using defaults.
-2014-01-20 23:43:42,936  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.module.domain.SysModule]; using defaults.
-2014-01-20 23:43:42,958  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Role]; using defaults.
-2014-01-20 23:43:42,971  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.queryModule.domain.SysQueryModule]; using defaults.
-2014-01-20 23:43:42,989  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.dictionary.domain.SysCode]; using defaults.
-2014-01-20 23:43:43,003  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Authority]; using defaults.
-2014-01-20 23:43:47,493  WARN [com.hong.core.security.support.FilterSecurityInterceptorSupport:141] - Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
-2014-01-20 23:44:02,694  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.web.controller.HomeController.home 方法开始执行！
-2014-01-20 23:44:02,773  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.web.controller.HomeController.home 方法耗时87毫秒！
-2014-01-20 23:44:02,774  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.web.controller.HomeController.home 方法执行结束！
-2014-01-20 23:44:03,227  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法开始执行！
-2014-01-20 23:44:03,606  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法耗时379毫秒！
-2014-01-20 23:44:03,606  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法执行结束！
-2014-01-20 23:44:05,644  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法开始执行！
-2014-01-20 23:44:05,705  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法耗时61毫秒！
-2014-01-20 23:44:05,706  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法执行结束！
-2014-01-20 23:44:05,941  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.module.controller.SysModuleController.ajaxFindModule 方法开始执行！
-2014-01-20 23:44:06,068  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.module.controller.SysModuleController.ajaxFindModule 方法耗时127毫秒！
-2014-01-20 23:44:06,069  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.module.controller.SysModuleController.ajaxFindModule 方法执行结束！
-2014-01-20 23:44:06,208  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法开始执行！
-2014-01-20 23:44:06,221  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法耗时13毫秒！
-2014-01-20 23:44:06,222  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法执行结束！
-2014-01-20 23:50:45,151  WARN [net.sf.ehcache.config.ConfigurationFactory:134] - No configuration found. Configuring ehcache from ehcache-failsafe.xml  found in the classpath: jar:file:/E:/Workspaces/IdeaGitHub/HONG_SOFT/out/artifacts/HONG_SOFT_war_exploded/WEB-INF/lib/ehcache-core-2.4.3.jar!/ehcache-failsafe.xml
-2014-01-20 23:50:45,500  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.spi.UpdateTimestampsCache]; using defaults.
-2014-01-20 23:50:45,576  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [org.hibernate.cache.internal.StandardQueryCache]; using defaults.
-2014-01-20 23:50:45,877  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.queryModule.domain.SysField]; using defaults.
-2014-01-20 23:50:46,175  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.queryModule.domain.SysListLink]; using defaults.
-2014-01-20 23:50:46,196  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.dictionary.domain.SysDictionary]; using defaults.
-2014-01-20 23:50:46,218  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Resource]; using defaults.
-2014-01-20 23:50:46,233  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.module.domain.SysModule]; using defaults.
-2014-01-20 23:50:46,251  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Role]; using defaults.
-2014-01-20 23:50:46,263  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.queryModule.domain.SysQueryModule]; using defaults.
-2014-01-20 23:50:46,281  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.dictionary.domain.SysCode]; using defaults.
-2014-01-20 23:50:46,302  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Authority]; using defaults.
-2014-01-20 23:50:49,830  WARN [com.hong.core.security.support.FilterSecurityInterceptorSupport:141] - Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
-2014-01-20 23:51:01,380  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法开始执行！
-2014-01-20 23:51:01,731  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法耗时356毫秒！
-2014-01-20 23:51:01,731  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法执行结束！
-2014-01-20 23:51:02,379  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.findComboTreeDict 方法开始执行！
-2014-01-20 23:51:02,425  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.findComboTreeDict 方法耗时46毫秒！
-2014-01-20 23:51:02,426  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.findComboTreeDict 方法执行结束！
-2014-01-20 23:51:02,617  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法开始执行！
-2014-01-20 23:51:02,634  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法耗时17毫秒！
-2014-01-20 23:51:02,635  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法执行结束！
-2014-01-20 23:52:43,120  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法开始执行！
-2014-01-20 23:52:43,216  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法耗时96毫秒！
-2014-01-20 23:52:43,217  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法执行结束！
-2014-01-20 23:52:43,439  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.findComboTreeDict 方法开始执行！
-2014-01-20 23:52:43,472  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.findComboTreeDict 方法耗时33毫秒！
-2014-01-20 23:52:43,473  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.findComboTreeDict 方法执行结束！
-2014-01-20 23:52:43,710  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法开始执行！
-2014-01-20 23:52:43,720  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法耗时10毫秒！
-2014-01-20 23:52:43,721  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法执行结束！
-2014-01-20 23:53:18,790  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.saveOrUpdate 方法开始执行！
-2014-01-20 23:53:19,632  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.saveOrUpdate 方法耗时842毫秒！
-2014-01-20 23:53:19,633  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.saveOrUpdate 方法执行结束！
-2014-01-20 23:53:22,821  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法开始执行！
-2014-01-20 23:53:22,835  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法耗时14毫秒！
-2014-01-20 23:53:22,836  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法执行结束！
-2014-01-20 23:53:23,038  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.findComboTreeDict 方法开始执行！
-2014-01-20 23:53:23,068  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.findComboTreeDict 方法耗时30毫秒！
-2014-01-20 23:53:23,069  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.findComboTreeDict 方法执行结束！
-2014-01-20 23:53:23,255  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法开始执行！
-2014-01-20 23:53:23,260  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法耗时5毫秒！
-2014-01-20 23:53:23,261  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法执行结束！
-2014-01-20 23:53:27,071  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:53:27,096  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时25毫秒！
-2014-01-20 23:53:27,097  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:53:28,203  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:53:28,218  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时14毫秒！
-2014-01-20 23:53:28,218  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:53:28,708  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:53:28,716  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时8毫秒！
-2014-01-20 23:53:28,717  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:53:29,202  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:53:29,211  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时9毫秒！
-2014-01-20 23:53:29,212  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:53:29,714  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:53:29,739  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时25毫秒！
-2014-01-20 23:53:29,740  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:53:30,421  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:53:30,430  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时10毫秒！
-2014-01-20 23:53:30,432  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:53:30,802  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:53:30,813  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时11毫秒！
-2014-01-20 23:53:30,814  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:53:32,058  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:53:32,069  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时11毫秒！
-2014-01-20 23:53:32,069  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:53:32,426  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:53:32,434  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时8毫秒！
-2014-01-20 23:53:32,434  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:54:09,501  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:54:09,570  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时69毫秒！
-2014-01-20 23:54:09,571  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:54:12,871  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:54:12,882  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时11毫秒！
-2014-01-20 23:54:12,883  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:54:14,252  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:54:14,261  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时9毫秒！
-2014-01-20 23:54:14,262  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:54:15,012  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:54:15,022  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时10毫秒！
-2014-01-20 23:54:15,023  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:54:16,364  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:54:16,372  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时8毫秒！
-2014-01-20 23:54:16,373  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:54:17,139  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:54:17,148  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时9毫秒！
-2014-01-20 23:54:17,148  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:54:19,053  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:54:19,065  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时12毫秒！
-2014-01-20 23:54:19,066  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:54:19,588  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:54:19,596  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时8毫秒！
-2014-01-20 23:54:19,597  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:54:20,275  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:54:20,279  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时4毫秒！
-2014-01-20 23:54:20,280  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
-2014-01-20 23:54:20,707  INFO [com.hong.core.log.LogAspectJ:24] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
-2014-01-20 23:54:20,715  INFO [com.hong.core.log.LogAspectJ:48] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时8毫秒！
-2014-01-20 23:54:20,716  INFO [com.hong.core.log.LogAspectJ:39] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
+2014-02-11 09:58:56,553  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.queryModule.domain.SysField]; using defaults.
+2014-02-11 09:58:56,921  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.queryModule.domain.SysListLink]; using defaults.
+2014-02-11 09:58:56,948  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.dictionary.domain.SysDictionary]; using defaults.
+2014-02-11 09:58:56,962  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Resource]; using defaults.
+2014-02-11 09:58:56,993  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.module.domain.SysModule]; using defaults.
+2014-02-11 09:58:57,012  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Role]; using defaults.
+2014-02-11 09:58:57,024  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.queryModule.domain.SysQueryModule]; using defaults.
+2014-02-11 09:58:57,041  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.manager.sys.dictionary.domain.SysCode]; using defaults.
+2014-02-11 09:58:57,051  WARN [org.hibernate.cache.ehcache.AbstractEhcacheRegionFactory:180] - HHH020003: Could not find a specific ehcache configuration for cache named [com.hong.core.security.domain.Authority]; using defaults.
+2014-02-11 09:59:02,435  WARN [com.hong.core.security.support.FilterSecurityInterceptorSupport:141] - Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2014-02-11 09:59:15,354  INFO [com.hong.core.log.LogAspectJ:25] - 前置通知：com.hong.manager.web.controller.HomeController.home 方法开始执行！
+2014-02-11 09:59:15,404  INFO [com.hong.core.log.LogAspectJ:59] - 环绕通知：com.hong.manager.web.controller.HomeController.home 方法耗时56毫秒！
+2014-02-11 09:59:15,405  INFO [com.hong.core.log.LogAspectJ:50] - 最终通知：com.hong.manager.web.controller.HomeController.home 方法执行结束！
+2014-02-11 09:59:16,805  INFO [com.hong.core.log.LogAspectJ:25] - 前置通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法开始执行！
+2014-02-11 09:59:17,246  INFO [com.hong.core.log.LogAspectJ:59] - 环绕通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法耗时441毫秒！
+2014-02-11 09:59:17,247  INFO [com.hong.core.log.LogAspectJ:50] - 最终通知：com.hong.manager.web.controller.HomeController.loadZTreeNodes 方法执行结束！
+2014-02-11 09:59:18,972  INFO [com.hong.core.log.LogAspectJ:25] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法开始执行！
+2014-02-11 09:59:19,101  INFO [com.hong.core.log.LogAspectJ:59] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法耗时130毫秒！
+2014-02-11 09:59:19,101  INFO [com.hong.core.log.LogAspectJ:50] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.browse 方法执行结束！
+2014-02-11 09:59:19,528  INFO [com.hong.core.log.LogAspectJ:25] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.findComboTreeDict 方法开始执行！
+2014-02-11 09:59:19,882  INFO [com.hong.core.log.LogAspectJ:25] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法开始执行！
+2014-02-11 09:59:19,957  INFO [com.hong.core.log.LogAspectJ:25] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadChildNode 方法开始执行！
+2014-02-11 09:59:20,186  INFO [com.hong.core.log.LogAspectJ:59] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.findComboTreeDict 方法耗时657毫秒！
+2014-02-11 09:59:20,186  INFO [com.hong.core.log.LogAspectJ:50] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.findComboTreeDict 方法执行结束！
+2014-02-11 09:59:20,217  INFO [com.hong.core.log.LogAspectJ:59] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadChildNode 方法耗时260毫秒！
+2014-02-11 09:59:20,217  INFO [com.hong.core.log.LogAspectJ:50] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadChildNode 方法执行结束！
+2014-02-11 09:59:20,337  INFO [com.hong.core.log.LogAspectJ:59] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法耗时455毫秒！
+2014-02-11 09:59:20,338  INFO [com.hong.core.log.LogAspectJ:50] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法执行结束！
+2014-02-11 09:59:23,254  INFO [com.hong.core.log.LogAspectJ:25] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法开始执行！
+2014-02-11 09:59:23,276  INFO [com.hong.core.log.LogAspectJ:59] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法耗时22毫秒！
+2014-02-11 09:59:23,277  INFO [com.hong.core.log.LogAspectJ:50] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.ajaxView 方法执行结束！
+2014-02-11 09:59:23,288  INFO [com.hong.core.log.LogAspectJ:25] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadChildNode 方法开始执行！
+2014-02-11 09:59:23,305  INFO [com.hong.core.log.LogAspectJ:25] - 前置通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法开始执行！
+2014-02-11 09:59:23,337  INFO [com.hong.core.log.LogAspectJ:59] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadChildNode 方法耗时49毫秒！
+2014-02-11 09:59:23,338  INFO [com.hong.core.log.LogAspectJ:50] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadChildNode 方法执行结束！
+2014-02-11 09:59:23,347  INFO [com.hong.core.log.LogAspectJ:59] - 环绕通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法耗时42毫秒！
+2014-02-11 09:59:23,347  INFO [com.hong.core.log.LogAspectJ:50] - 最终通知：com.hong.manager.sys.dictionary.controller.DictionaryController.loadCodeRow 方法执行结束！
+2014-02-11 09:59:56,349  INFO [com.hong.core.log.LogAspectJ:25] - 前置通知：com.hong.manager.sys.queryModule.controller.SysQueryModuleController.add 方法开始执行！
+2014-02-11 09:59:56,365  INFO [com.hong.core.log.LogAspectJ:59] - 环绕通知：com.hong.manager.sys.queryModule.controller.SysQueryModuleController.add 方法耗时16毫秒！
+2014-02-11 09:59:56,365  INFO [com.hong.core.log.LogAspectJ:50] - 最终通知：com.hong.manager.sys.queryModule.controller.SysQueryModuleController.add 方法执行结束！

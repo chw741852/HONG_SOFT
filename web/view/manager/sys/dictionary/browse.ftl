@@ -12,6 +12,7 @@
     <script type="text/javascript" src="${rc.contextPath}/js/jquery-1.8.0.min.js"></script>
     <script type="text/javascript" src="${rc.contextPath}/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="${rc.contextPath}/js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="${rc.contextPath}/js/easyui/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="${rc.contextPath}/js/ztree/js/jquery.ztree.core-3.5.min.js"></script>
     <script type="text/javascript" src="${rc.contextPath}/js/ztree/js/jquery.ztree.exedit-3.5.min.js"></script>
     <script type="text/javascript" src="${rc.contextPath}/js/ztree/js/jquery.ztree.excheck-3.5.min.js"></script>
@@ -59,14 +60,14 @@
         });
     </script>
 </head>
-<body class="easyui-layout" data-options="fit: true">
+<body class="easyui-layout">
 <div data-options="region:'west', split:true, title:'字典表管理', tools:'#p-tools'" style="width: 220px; overflow: hidden;">
     <div style="padding: 10px;" class="ztree" id="dictTree">
 
     </div>
 </div>
 
-<div data-options="region:'center'" style="overflow: hidden;">
+<div data-options="region:'center'" style="overflow: auto">
     <table cellpadding="0" cellspacing="0" class="table1">
         <thead>
         <tr>
@@ -95,27 +96,32 @@
         <a href="#" class="easyui-linkbutton" iconCls="icon-edit" onclick="scriptInstance.edit();">修 改</a>&nbsp;&nbsp;
         <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="scriptInstance.remove();">删 除</a>
     </div>
-    <div style="width: 99%; margin: 4px 4px;" id="divWidth">
-        <div class="easyui-tabs">
+    <div style="width: 99%; margin:4px;" id="divWidth">
+        <div class="easyui-tabs" style="margin: 2px">
             <div title="键值对列表">
-                <table class="easyui-datagrid" title="" style="margin: 2px auto;" id="codeDg"
+                <table class="easyui-datagrid" title="" id="codeDg"
                        data-options="singleSelect:true, collapsible:true, fitColumns:true, rownumbers:true,
                     toolbar: '#tb', url: '${rc.contextPath}/manager/sys/dictionary/loadCodeRow'">
                     <thead>
-                    <th data-options="field:'id', width:$(this).width()*0.33, editor: 'text'">id</th>
-                    <th data-options="field:'number', width:$(this).width()*0.33, editor: 'text'">键</th>
-                    <th data-options="field:'name', width:$(this).width()*0.33, editor: 'text'">值</th>
+                    <th data-options="field:'id', width:$(this).width()*0.33">id</th>
+                    <th data-options="field:'number', width:$(this).width()*0.33, editor: {
+                        type:'validatebox', options:{required:true}
+                    }">键</th>
+                    <th data-options="field:'name', width:$(this).width()*0.33, editor: {
+                        type:'validatebox', options:{required:true}
+                    }">值</th>
                     </thead>
                 </table>
             </div>
             <div title="子节点列表">
-                <table class="easyui-datagrid" title="" style="margin: 2px auto;" id="dg"
-                       data-options="singleSelect:true, collapsible:true, fitColumns:true, rownumbers:true,
-                    toolbar: '#tb'">
+                <table class="easyui-datagrid" title="" id="dg"
+                       data-options="singleSelect:true, fitColumns:true, rownumbers:true,
+                       onLoadSuccess:easyuiInstance.onLoadSuccess,
+                       url:'${rc.contextPath}/manager/sys/dictionary/loadChildNode'">
                     <thead>
-                    <th data-options="field:'sequence', width:$(this).width()*0.33, editor: 'text'">序 号</th>
-                    <th data-options="field:'key', width:$(this).width()*0.33, editor: 'text'">键</th>
-                    <th data-options="field:'name', width:$(this).width()*0.33, editor: 'text'">名 称</th>
+                    <th data-options="field:'sequence', width:$(this).width()*0.33">序 号</th>
+                    <th data-options="field:'key', width:$(this).width()*0.33">键</th>
+                    <th data-options="field:'name', width:$(this).width()*0.33">名 称</th>
                     <th data-options="field:'id'"></th>
                     </thead>
                 </table>
@@ -134,19 +140,19 @@
                     <td class="fieldtitle">序号：</td>
                     <td class="fieldinput">
                         <input name="sequence" id="sequence" class="numberspinner easyui-numberspinner"
-                               data-options="required:true, min:0, missingMessage:'该字段不能为空！'">
+                               data-options="required:true, min:0">
                     </td>
                     <td class="fieldtitle">键：</td>
                     <td class="fieldinput">
                         <input name="key" id="key" class="inputtxt easyui-validatebox"
-                               data-options="required:true,missingMessage:'该字段不能为空！'">
+                               data-options="required:true">
                     </td>
                 </tr>
                 <tr>
                     <td class="fieldtitle">名称：</td>
                     <td class="fieldinput">
                         <input name="name" id="name" class="inputtxt easyui-validatebox"
-                               data-options="required:true,missingMessage:'该字段不能为空！'">
+                               data-options="required:true">
                     </td>
                     <td class="fieldtitle">父节点：</td>
                     <td class="fieldinput">
@@ -174,9 +180,9 @@
 <div id="tb" style="height: auto">
     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="easyuiInstance.append()">添 加</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="easyuiInstance.edit()">修 改</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="easyuiInstance.remove()">删 除</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="easyuiInstance.save()">保 存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="easyuiInstance.accept()">保 存</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="easyuiInstance.reject()">取 消</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="easyuiInstance.remove()">删 除</a>
 </div>
 
 <script type="text/javascript">
@@ -184,7 +190,6 @@
         var parentWidth = $(".combotree").eq(0).parent().width();
         $(".combotree,.numberspinner").css("width", parentWidth * width);
     }
-
     setEasyUiWidth(0.85);
 </script>
 </body>
