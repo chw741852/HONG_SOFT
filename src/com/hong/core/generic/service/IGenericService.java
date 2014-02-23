@@ -167,12 +167,12 @@ public interface IGenericService {
      * @param schema
      * @return
      */
-    public List getTablesInSchema(final String schema);
+    public List getTablesInSchema(final String schema, final String tableName);
 
     /**
      * 取得当前表中所有字段
      * @param table
      * @return
      */
-    public List getColumnsInTable(final String table);
+    public List getColumnsInTable(final String table, final String column);
 }

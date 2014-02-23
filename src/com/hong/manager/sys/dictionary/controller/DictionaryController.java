@@ -2,13 +2,9 @@ package com.hong.manager.sys.dictionary.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.hong.core.generic.domain.IdEntity;
-import com.hong.core.generic.service.IGenericService;
+import com.hong.manager.sys.base.controller.impl.BaseControllerImpl;
 import com.hong.manager.sys.dictionary.domain.SysCode;
 import com.hong.manager.sys.dictionary.domain.SysDictionary;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,13 +25,8 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/manager/sys/dictionary")
-public class DictionaryController extends IdEntity {
-    @Autowired
-    private IGenericService genericService;
-
-    private static final Log log = LogFactory.getLog(DictionaryController.class);
+public class DictionaryController extends BaseControllerImpl {
     private final String BASEPATH = "/manager/sys/dictionary";
-
 
     @RequestMapping(value = "/browse")
     public ModelAndView browse() {
@@ -62,20 +53,7 @@ public class DictionaryController extends IdEntity {
         }
 
         String json = JSON.toJSONString(result);
-        try {
-            response.getWriter().write(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/saveOrUpdate")
@@ -84,10 +62,18 @@ public class DictionaryController extends IdEntity {
 
         SysDictionary parent = (SysDictionary)genericService.lookUp(SysDictionary.class, dictionary.getParentId());
         dictionary.setParent(parent);
+
         if (dictionary.getId() != null && dictionary.getId() > 0) {
+            if (dictionary.getKey() == null || dictionary.getKey().trim().equals("")) {
+                dictionary.setKey(dictionary.getId().toString());
+            }
             genericService.updateObject(dictionary);
         } else {
             genericService.saveObject(dictionary);
+            if (dictionary.getKey() == null || dictionary.getKey().trim().equals("")) {
+                dictionary.setKey(dictionary.getId().toString());
+            }
+            genericService.updateObject(dictionary);
         }
 
         Map<String, Object> result = new HashMap<String, Object>();
@@ -100,20 +86,7 @@ public class DictionaryController extends IdEntity {
         }
 
         String json = JSON.toJSONString(result);
-        try {
-            response.getWriter().print(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/ajaxView")
@@ -127,20 +100,7 @@ public class DictionaryController extends IdEntity {
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
         String json = JSON.toJSONString(result);
-        try {
-            response.getWriter().print(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/loadCodeRow")
@@ -152,20 +112,7 @@ public class DictionaryController extends IdEntity {
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
         String json = JSON.toJSONString(result);
-        try {
-            response.getWriter().print(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/loadChildRow")
@@ -187,20 +134,7 @@ public class DictionaryController extends IdEntity {
         }
 
         String json = JSON.toJSONString(result);
-        try {
-            response.getWriter().print(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/checkKey")
@@ -223,18 +157,7 @@ public class DictionaryController extends IdEntity {
         }
 
         String json = JSON.toJSONString(result);
-        try {
-            response.getWriter().write(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/edit")
@@ -248,18 +171,7 @@ public class DictionaryController extends IdEntity {
         }
 
         String json = JSON.toJSONString(dictionary);
-        try {
-            response.getWriter().write(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/delete")
@@ -304,18 +216,7 @@ public class DictionaryController extends IdEntity {
         List<Map> result = genericService.executeSqlToRecordMap(sql.toString());
         String json = JSON.toJSONString(result);
 
-        try {
-            response.getWriter().write(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/saveOrUpdateCode")
@@ -347,18 +248,7 @@ public class DictionaryController extends IdEntity {
         result.put("code", sysCode);
 
         String json = JSON.toJSONString(result);
-        try {
-            response.getWriter().write(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/deleteCode")
@@ -384,5 +274,23 @@ public class DictionaryController extends IdEntity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @RequestMapping("/zTreeDrop")
+    public void zTreeDrop(long id, long targetId, String type, HttpServletResponse response) {
+        response.setContentType("text/html;charset=UTF-8");
+
+        Map<String, String> map = new HashMap<String, String>();
+        SysDictionary child = (SysDictionary)genericService.lookUp(SysDictionary.class, id);
+        SysDictionary parent = (SysDictionary)genericService.lookUp(SysDictionary.class, targetId);
+        if ("inner".equals(type.trim())) {
+            child.setParent(parent);
+            if (genericService.updateObject(child) == null) {
+                map.put("errorMsg", "保存失败");
+            }
+        }
+
+        String json = JSON.toJSONString(map);
+        printJson(response, json);
     }
 }

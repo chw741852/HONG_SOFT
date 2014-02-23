@@ -34,8 +34,6 @@ public class SysListLink extends IdEntity {
     private Boolean verify; // 是否需要验证
     private String verifyCondition; // 验证表达式
 
-    @OneToOne(mappedBy = "dbClickRowLink", cascade = CascadeType.REFRESH)
-    private SysQueryModule queryModule;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "sysQueryModuleId")
     private SysQueryModule sysQueryModule;
@@ -102,14 +100,6 @@ public class SysListLink extends IdEntity {
 
     public void setVerifyCondition(String verifyCondition) {
         this.verifyCondition = verifyCondition;
-    }
-
-    public SysQueryModule getQueryModule() {
-        return queryModule;
-    }
-
-    public void setQueryModule(SysQueryModule queryModule) {
-        this.queryModule = queryModule;
     }
 
     public SysQueryModule getSysQueryModule() {

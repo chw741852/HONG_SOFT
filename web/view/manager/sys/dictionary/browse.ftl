@@ -42,6 +42,7 @@
             callback: {
                 beforeDrag: scriptInstance.beforeDrag,
                 beforeDrop: scriptInstance.beforeDrop,
+                onDrop: scriptInstance.onDrop,
                 onClick: scriptInstance.zTreeClick
             }
         };
@@ -144,8 +145,7 @@
                     </td>
                     <td class="fieldtitle">键：</td>
                     <td class="fieldinput">
-                        <input name="key" id="key" class="inputtxt easyui-validatebox"
-                               data-options="required:true">
+                        <input name="key" id="key" class="inputtxt">
                     </td>
                 </tr>
                 <tr>

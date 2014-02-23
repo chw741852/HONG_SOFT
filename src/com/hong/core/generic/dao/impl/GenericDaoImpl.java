@@ -2,7 +2,6 @@ package com.hong.core.generic.dao.impl;
 
 import com.hong.core.generic.dao.IGenericDao;
 import com.hong.core.util.PublicConstants;
-import com.hong.core.util.ReflectUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
@@ -100,8 +99,8 @@ public class GenericDaoImpl implements IGenericDao {
     public List executeObjectSql(String sql, int position, int length) {
         Query query = em.createQuery(sql);
 
-        if (position >= 0 || length > 0) {
-            query.setFirstResult(position);
+        if (position >= 0 && length > 0) {
+            query.setFirstResult((position - 1) * length);
             query.setMaxResults(length);
         }
 
@@ -130,7 +129,7 @@ public class GenericDaoImpl implements IGenericDao {
             int cols = rs.getMetaData().getColumnCount();
             if (position > 0 && length != 0) {
                 int n = 1;
-                if (rs.absolute(position + 1))
+                if (rs.absolute((position - 1) * length + 1))
                     while (n <= length) {
                         String[] recordArray = new String[cols];
                         for (int i = 1; i <= cols; i++) {
@@ -314,7 +313,7 @@ public class GenericDaoImpl implements IGenericDao {
                 returnParams[0] = rs.getMetaData();
             if (position != 0 && length != 0) {
                 int n = 1;
-                if (rs.absolute(position + 1)) {
+                if (rs.absolute((position - 1) * length + 1)) {
                     while (n <= length) {
                         Object[] recordArray = new Object[cols];
                         for (int i=1; i<=cols; i++) {
@@ -366,14 +365,16 @@ public class GenericDaoImpl implements IGenericDao {
                     ResultSet.CONCUR_READ_ONLY);
             rs = ps.executeQuery();
             int cols = rs.getMetaData().getColumnCount();
+            if (returnParams != null && returnParams.length > 0)
+                returnParams[0] = rs.getMetaData();
             if (position != 0 || length != 0) {
                 int startPosition = position;
                 int records = length;
                 if (records <= 0)    records = Integer.MAX_VALUE;
-                if (startPosition <= 0) startPosition = 0;
+                if (startPosition <= 0) startPosition = 1;
                 int n = 1;
-                if (rs.absolute(startPosition + 1)) {
-                    while (n < records) {
+                if (rs.absolute((startPosition-1)*records + 1)) {
+                    while (n <= records) {
                         Map record = new HashMap();
                         for (int i=1; i<=cols; i++) {
                             record.put(rs.getMetaData().getColumnName(i),
@@ -443,25 +444,21 @@ public class GenericDaoImpl implements IGenericDao {
     }
 
     @Override
-    public List getTablesInSchema(String schema) {
+    public List<String> getTablesInSchema(String schema, String tableName) {
         ResultSet rs = null;
-        List lt = new ArrayList();
+        List<String> lt = new ArrayList<String>();
         Connection connection = getConnection();
 
         DatabaseMetaData dbmd = null;
-        String dbName = (String) ReflectUtils.getFieldValue(dbmd, "database");
         String[] types = {"TABLE"};
 
         try {
             dbmd = connection.getMetaData();
-            rs = dbmd.getTables(null, null, "%", types);
+            rs = dbmd.getTables(null, null, tableName, types);
             while (rs.next()) {
-                String tableName = rs.getString(3);
+                String tName = rs.getString(3);
                 String db = rs.getString(1);
-                if (dbName.equals(db)) {
-                    lt.add(tableName);
-                }
-                lt.add(tableName);
+                lt.add(tName);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -480,7 +477,33 @@ public class GenericDaoImpl implements IGenericDao {
     }
 
     @Override
-    public List getColumnsInTable(String table) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public List<String> getColumnsInTable(String table, String Column) {
+        ResultSet rs = null;
+        List<String> lt = new ArrayList<String>();
+        Connection connection = getConnection();
+
+        DatabaseMetaData dbmd = null;
+
+        try {
+            dbmd = connection.getMetaData();
+            rs = dbmd.getColumns(null, null, table, Column);
+            while (rs.next()) {
+                String tName = rs.getString(4);
+                lt.add(tName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            log.error(e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                log.error(e.getMessage());
+            }
+        }
+
+        return lt;
     }
 }

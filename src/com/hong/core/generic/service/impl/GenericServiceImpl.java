@@ -161,12 +161,12 @@ public class GenericServiceImpl implements IGenericService {
     }
 
     @Override
-    public List getTablesInSchema(String schema) {
-        return genericDao.getTablesInSchema(schema);
+    public List getTablesInSchema(String schema, String tableName) {
+        return genericDao.getTablesInSchema(schema, tableName);
     }
 
     @Override
-    public List getColumnsInTable(String table) {
-        return genericDao.getColumnsInTable(table);  //To change body of implemented methods use File | Settings | File Templates.
+    public List getColumnsInTable(String table, String column) {
+        return genericDao.getColumnsInTable(table, column);  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

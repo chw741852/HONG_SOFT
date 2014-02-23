@@ -17,6 +17,22 @@ ScriptUtil.prototype = {
     beforeDrop:function(treeId, treeNodes, targetNode, moveType) {
         return true;
     },
+    onDrop:function(event, treeId, treeNodes, targetNode, moveType) {
+        // TODO 只支持拖动为子节点，否则不保存
+        if (moveType == "inner") {
+            $.ajax({
+                type: "post",
+                url: contextPath + "/manager/sys/dictionary/zTreeDrop",
+                data: "id=" + treeNodes[0].id + "&targetId=" + targetNode.id + "&type=" + moveType,
+                dataType: "json",
+                success: function(result) {
+                    if (result.errorMsg) {
+                        scriptTools.showMsg(result.errorMsg, "");
+                    }
+                }
+            });
+        }
+    },
     zTreeClick:function(event, treeId, treeNode) {
         $.ajax({
             type: "Get",

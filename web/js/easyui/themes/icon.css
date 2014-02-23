@@ -62,3 +62,7 @@
 .icon-mini-refresh{
 	background:url('icons/mini_refresh.png') no-repeat center center;
 }
+/*自定义*/
+.icon-excel{
+    background:url('icons/excel.png') no-repeat center center;
+}

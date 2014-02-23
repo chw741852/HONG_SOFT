@@ -42,6 +42,6 @@ public interface IGenericDao {
     public List<Map> executeSqlToRecordMap(final String sql, final int position,final int length,final Object[] returnParams);
 
     public List getTableSchemas();
-    public List getTablesInSchema(final String schema);
-    public List getColumnsInTable(final String table);
+    public List getTablesInSchema(final String schema, final String tableName);
+    public List getColumnsInTable(final String table, final String column);
 }

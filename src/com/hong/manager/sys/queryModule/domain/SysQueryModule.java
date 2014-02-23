@@ -27,17 +27,21 @@ public class SysQueryModule extends IdEntity {
     private String headPicPath; // 导航图片路径
     private String pagePosition;    // 导航位置描述
 
-    @OneToOne(targetEntity = SysListLink.class, cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "dbClickRowLinkId")
+    @Transient
     private SysListLink dbClickRowLink = new SysListLink();    // 行双击操作
+    private Long dbClickRowLinkId;  // 行双击操作对应link的ID
 
     private String relationSql;     // 表之间关系SQL
     private String dialogResultFormat;    // 格式：${fieldName}*${fieldName1},专为对话框需返回值用的
     private String listTransferFieldFormat; // 格式：${fieldName}*${fieldName1},专为操作用的（如新建，修改、查看、删除、审核等操作)
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "sysQueryModule")
+    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy = "sysQueryModule")
+    @OrderBy("sequence asc")
     private Set<SysListLink> sysListLinks = new HashSet<SysListLink>();
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "sysQueryModule")
+
+    // TODO 此处排序，显示 > 查询 > 打印，则BUG: 后2条可有可无
+    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.EAGER, mappedBy = "sysQueryModule")
+    @OrderBy("displaySequence asc, querySequence asc, printSequence asc")
     private Set<SysField> sysFields = new HashSet<SysField>();
 
     public String getName() {
@@ -86,6 +90,14 @@ public class SysQueryModule extends IdEntity {
 
     public void setDbClickRowLink(SysListLink dbClickRowLink) {
         this.dbClickRowLink = dbClickRowLink;
+    }
+
+    public Long getDbClickRowLinkId() {
+        return dbClickRowLinkId;
+    }
+
+    public void setDbClickRowLinkId(Long dbClickRowLinkId) {
+        this.dbClickRowLinkId = dbClickRowLinkId;
     }
 
     public String getRelationSql() {

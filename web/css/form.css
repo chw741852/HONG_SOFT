@@ -42,7 +42,7 @@ body {
 .form1 table td .selectfield {
     width: 88%;
     border: 1px solid #bbb;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .form2 table {
@@ -69,6 +69,18 @@ body {
     height: 17px;
 }
 
+.form2 table td .inputtxt_notempty {
+    width: 88%;
+    border: 1px solid #bbb;
+    font-size: 12px;
+    height: 17px;
+    outline-color: #FF0000;
+}
+
+.form2 table td .inputtxt_notempty:focus {
+    border: 2px solid #ff0000;
+}
+
 .form2 table td .selectfield {
     width: 88%;
     border: 1px solid #bbb;
@@ -79,4 +91,8 @@ body {
     width: 88%;
     border: 1px solid #bbb;
     font-size: 14px;
+}
+
+.bitian {
+    color: #FF0000;
 }

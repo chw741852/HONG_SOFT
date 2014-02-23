@@ -2,11 +2,8 @@ package com.hong.manager.sys.module.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.hong.core.generic.service.IGenericService;
+import com.hong.manager.sys.base.controller.impl.BaseControllerImpl;
 import com.hong.manager.sys.module.domain.SysModule;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,12 +26,7 @@ import java.util.Map;
  */
 
 @Controller
-public class SysModuleController {
-    private static final Log log = LogFactory.getLog(SysModuleController.class);
-
-    @Autowired
-    private IGenericService genericService;
-
+public class SysModuleController extends BaseControllerImpl {
     @RequestMapping(value = "/manager/sys/module/browse")
     public ModelAndView browseModule() {
         ModelAndView mv = new ModelAndView("/manager/sys/module/browse");
@@ -65,20 +57,7 @@ public class SysModuleController {
         genericService.saveObject(sysModule);
 
         String json = JSON.toJSONString(sysModule);
-        try {
-            response.getWriter().write(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/manager/sys/module/view")
@@ -99,7 +78,7 @@ public class SysModuleController {
     }
 
     @RequestMapping(value = "/manager/sys/module/saveOrUpdate")
-    public void saveOrUpdate(HttpServletRequest request, HttpServletResponse response, SysModule sysModule) {
+    public void saveOrUpdate(HttpServletResponse response, SysModule sysModule) {
         Map<String, Object> result = new HashMap<String, Object>();
         response.setContentType("text/html;charset=UTF-8");
 
@@ -119,20 +98,7 @@ public class SysModuleController {
         }
 
         String json = JSON.toJSONString(result);
-        try {
-            response.getWriter().write(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/manager/sys/module/ajaxFindModule")
@@ -150,20 +116,7 @@ public class SysModuleController {
         }
 
         String json = JSON.toJSONString(result);
-        try {
-            response.getWriter().write(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/manager/sys/module/loadChildNode")
@@ -190,20 +143,7 @@ public class SysModuleController {
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
         String json = JSON.toJSONString(result);
-        try {
-            response.getWriter().write(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/manager/sys/module/ajaxView")
@@ -221,20 +161,7 @@ public class SysModuleController {
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
         String json = JSON.toJSONString(result);
-        try {
-            response.getWriter().write(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping("/manager/sys/module/edit")
@@ -248,20 +175,7 @@ public class SysModuleController {
         }
 
         String json = JSON.toJSONString(sysModule);
-        try {
-            response.getWriter().write(json);
-            response.getWriter().flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        } finally {
-            try {
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                log.error(e.getMessage());
-            }
-        }
+        printJson(response, json);
     }
 
     @RequestMapping(value = "/manager/sys/module/delete")
@@ -280,13 +194,11 @@ public class SysModuleController {
             response.getWriter().flush();
         } catch (IOException e) {
             e.printStackTrace();
-            log.error(e.getMessage());
         } finally {
             try {
                 response.getWriter().close();
             } catch (IOException e) {
                 e.printStackTrace();
-                log.error(e.getMessage());
             }
         }
     }
