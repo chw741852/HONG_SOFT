@@ -2,7 +2,6 @@ package com.hong.core.security.domain;
 
 import com.hong.core.generic.domain.IdEntity;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -26,11 +25,18 @@ public class User extends IdEntity implements UserDetails {
     private String username;    // 用户名
     @Column(length = 100, nullable = false)
     private String password;    // 密码
+    @Column(length = 50)
+    private String type;        // 用户类别 1-超级用户 2-管理员 3-普通用户
+
+    @Transient
+    private String confirmPassword;    // 重复密码
+
     @Column(length = 10)
-    private String sex;     // 性别
+    private String sex;     // 性别 1-男 2-女
     @Column(length = 20)
     private String idCard;  // 身份证
-    private Date bornDate;  // 出生日期
+    @Column(length = 50)
+    private String bornDate;  // 出生日期
     @Column(length = 50)
     private String phone;   // 电话
     @Column(length = 50)
@@ -41,14 +47,14 @@ public class User extends IdEntity implements UserDetails {
     private String qq;  // QQ
     @Column(length = 50)
     private String msn; // MSN
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date beginTime; // 开始使用日期
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endTime;   // 结束使用日期
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastLogoutTime;    // 上次登录时间
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date loginTime; // 登录时间
+    @Column(length = 50)
+    private String beginTime; // 开始使用日期
+    @Column(length = 50)
+    private String endTime;   // 结束使用日期
+    @Column(length = 50)
+    private String lastLogoutTime;    // 上次登录时间
+    @Column(length = 50)
+    private String loginTime; // 登录时间
     @Column(length = 50)
     private String lastLogoutIp;    // 上次登录IP
     @Column(length = 50)
@@ -88,6 +94,22 @@ public class User extends IdEntity implements UserDetails {
         this.password = password;
     }
 
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getSex() {
         return sex;
     }
@@ -104,11 +126,11 @@ public class User extends IdEntity implements UserDetails {
         this.idCard = idCard;
     }
 
-    public Date getBornDate() {
+    public String getBornDate() {
         return bornDate;
     }
 
-    public void setBornDate(Date bornDate) {
+    public void setBornDate(String bornDate) {
         this.bornDate = bornDate;
     }
 
@@ -152,35 +174,35 @@ public class User extends IdEntity implements UserDetails {
         this.msn = msn;
     }
 
-    public Date getBeginTime() {
+    public String getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(Date beginTime) {
+    public void setBeginTime(String beginTime) {
         this.beginTime = beginTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
-    public Date getLastLogoutTime() {
+    public String getLastLogoutTime() {
         return lastLogoutTime;
     }
 
-    public void setLastLogoutTime(Date lastLogoutTime) {
+    public void setLastLogoutTime(String lastLogoutTime) {
         this.lastLogoutTime = lastLogoutTime;
     }
 
-    public Date getLoginTime() {
+    public String getLoginTime() {
         return loginTime;
     }
 
-    public void setLoginTime(Date loginTime) {
+    public void setLoginTime(String loginTime) {
         this.loginTime = loginTime;
     }
 
@@ -218,11 +240,10 @@ public class User extends IdEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(
-                roles.size());
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(roles.size());
         for (Role role : roles) {
             for (Authority authority:role.getAuthorities())
-                grantedAuthorities.add(new SimpleGrantedAuthority(authority.getName()));
+                grantedAuthorities.add(new SimpleGrantedAuthority(authority.getId().toString()));
         }
         return grantedAuthorities;
     }

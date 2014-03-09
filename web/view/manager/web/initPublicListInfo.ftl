@@ -42,6 +42,7 @@
     </div>
 </div>
 <br/>
-${datagrid}
+<span style="color: #FF0000">${flash_message!}</span>
+${datagrid!}
 </body>
 </html>

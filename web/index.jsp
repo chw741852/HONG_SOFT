@@ -9,13 +9,15 @@
 <html>
   <head>
     <title></title>
-      <link rel="stylesheet" type="text/css" href="js/easyui/themes/metro/easyui.css">
-      <link rel="stylesheet" type="text/css" href="js/easyui/themes/icon.css">
 
       <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
-      <script type="text/javascript" src="js/easyui/jquery.easyui.min.js"></script>
+      <script type="text/javascript">
+          $(function(){
+              location.href="<%=request.getContextPath()%>/home";
+          });
+      </script>
   </head>
   <body>
-    <a href="<%=request.getContextPath()%>/manager/home">主页面</a>
+
   </body>
 </html>

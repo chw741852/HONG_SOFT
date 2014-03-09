@@ -51,8 +51,8 @@ public class SysField extends IdEntity {
     @Column(length = 50)
     private String controlKind; // 页面控件类型
     @Column(length = 50)
-    private String dataSourceType;  // TODO 数据来源类型，作用不大，可去掉
-    @Column(length = 100)
+    private String dataSourceType;  // 数据来源类型
+    @Column(length = 600)
     private String dataSourceSql;   // 数据来源SQL语句
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)

@@ -3,7 +3,7 @@ body {
 }
 .ftitle {
     font-size: 12px;
-    padding: 5px 20px;
+    padding: 5px 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #ccc;
 }
@@ -90,9 +90,13 @@ body {
 .form2 table td .selectfield {
     width: 88%;
     border: 1px solid #bbb;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .bitian {
     color: #FF0000;
+}
+
+.newLine {
+    margin: 5px 0;
 }

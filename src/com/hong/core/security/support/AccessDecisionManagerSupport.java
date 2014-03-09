@@ -1,5 +1,6 @@
 package com.hong.core.security.support;
 
+import com.hong.core.security.domain.User;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
@@ -7,6 +8,7 @@ import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -28,6 +30,7 @@ public class AccessDecisionManagerSupport implements AccessDecisionManager {
         while (configAttributeIterator.hasNext()) {
             ConfigAttribute ca = configAttributeIterator.next();
             String needRole = ((SecurityConfig)ca).getAttribute();
+
             // grantedAuthority为用户所赋予的权限，needRole为访问相应的资源所需要的权限。
             for (GrantedAuthority grantedAuthority:authentication.getAuthorities()) {
                 if (needRole.trim().equals(grantedAuthority.getAuthority().trim()))

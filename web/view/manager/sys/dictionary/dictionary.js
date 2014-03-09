@@ -126,7 +126,8 @@ ScriptUtil.prototype = {
                                 $('#key').html('');
                                 $('#dictName').html('');
                                 $('#parentNode').html('');
-                                $('#dg').datagrid('reload', contextPath + "/manager/sys/dictionary/loadChildNode?id=0");
+                                $('#dg').datagrid('load', {id:0});
+                                $('#codeDg').datagrid('load', {dictId:0});
                             }
                             zTree.removeNode(treeNode, false);  //  false - 不促发回调函数
                         } else {

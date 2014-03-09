@@ -1,27 +1,27 @@
-.table1 {
+.table1,.lookupTable {
     width: 99%;
     margin: 2px auto;
     border-right: 1px solid #b1c242;
     border-bottom: 1px solid #b1c242;
 }
 
-.table1 thead td {
+.table1 thead td,.lookupTable thead td {
     background-color: #e5f0c9;
-    padding-left: 10px;
+    padding-left: 5px;
     height: 25px;
+    font-weight: bold;
 }
 
-.table1 td {
+.table1 td,.lookupTable td {
     border-top: 1px solid #b1c242;
     border-left: 1px solid #b1c242;
-    font-weight: bold;
     vertical-align: middle;
     height: 20px;
 }
 
 .table1 .fieldtitle {
     color: #333;
-    padding: 3px 5px 0 0;
+    padding: 3px 3px 0 0;
     width: 15%;
     text-align: right;
 }
@@ -32,7 +32,7 @@
 
 .table1 .fieldinput div {
     font-weight: normal;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .table1 td .inputtxt {
@@ -45,5 +45,25 @@
 .table1 td .selectfield {
     width: 88%;
     border: 1px solid #bbb;
-    font-size: 14px;
+    font-size: 12px;
+}
+
+.lookupTable .fieldtitle {
+    background-color: #e5f0c9;
+    padding: 3px 5px 0 0;
+    width: 10%;
+    text-align: right;
+}
+
+.lookupTable .fieldinput {
+    width: 23%;
+    padding: 3px 0 0 5px;
+}
+
+.lookupTable .ztreeUl {
+    border: 1px solid #b1c242;
+    background-color: #FFFFFF;
+    width: 180px;
+    height: 300px;
+    overflow-y: auto;
 }

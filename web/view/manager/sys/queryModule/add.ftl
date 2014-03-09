@@ -34,43 +34,44 @@
 
 </div>
 
-<div id="p" class="easyui-panel" title="基础信息" style="padding:5px;">
-    <form id="saveForm" class="form2" action="${rc.contextPath}/manager/sys/queryModule/save" method="post">
-    <table cellpadding="0" cellspacing="2">
-        <tr>
-            <td class="fieldtitle"><span class="bitian">* </span>模块名称：</td>
-            <td class="fieldinput"><input id="name" name="name" class="inputtxt_notempty"></td>
-            <td class="fieldtitle">导航位置描述：</td>
-            <td class="fieldinput"><input id="pagePosition" name="pagePosition" class="inputtxt"></td>
-            <td class="fieldtitle">导航图片路径：</td>
-            <td class="fieldinput"><input id="headPicPath" name="headPicPath" class="inputtxt"></td>
-        </tr>
-        <tr><td style="height: 2px;"></td> </tr>
-        <tr>
-            <td class="fieldtitle">每页记录数：</td>
-            <td class="fieldinput"><input id="pageSize" name="pageSize" class="inputtxt"></td>
-            <td class="fieldtitle">双击行操作：</td>
-            <td class="fieldinput">
-                <select name="dbClickRowLinkId" id="dbClickRowLinkId" class="selectfield">
-                    <option value=""> </option>
-                </select>
-            </td>
-            <td class="fieldtitle">显示查询条件：</td>
-            <td class="fieldinput"><input type="checkbox" name="showQueryCondition" checked></td>
-        </tr>
-        <tr><td style="height: 2px;"></td> </tr>
-        <tr>
-            <td class="fieldtitle">表之间关系SQL：</td>
-            <td class="fieldinput" colspan="5">
-                <textarea cols="100" rows="4" name="relationSql"></textarea>
-            </td>
-        </tr>
-    </table>
+<form id="saveForm" class="form2" action="${rc.contextPath}/manager/sys/queryModule/save" method="post">
+    <div id="p" class="easyui-panel" title="基础信息" style="padding:5px;">
+        <table cellpadding="0" cellspacing="2">
+            <tr>
+                <td class="fieldtitle"><span class="bitian">* </span>模块名称：</td>
+                <td class="fieldinput"><input id="name" name="name" class="inputtxt_notempty"></td>
+                <td class="fieldtitle">导航位置描述：</td>
+                <td class="fieldinput"><input id="pagePosition" name="pagePosition" class="inputtxt"></td>
+                <td class="fieldtitle">导航图片路径：</td>
+                <td class="fieldinput"><input id="headPicPath" name="headPicPath" class="inputtxt"></td>
+            </tr>
+            <tr><td style="height: 2px;"></td> </tr>
+            <tr>
+                <td class="fieldtitle">每页记录数：</td>
+                <td class="fieldinput"><input id="pageSize" name="pageSize" class="inputtxt"></td>
+                <td class="fieldtitle">双击行操作：</td>
+                <td class="fieldinput">
+                    <select name="dbClickRowLinkId" id="dbClickRowLinkId" class="selectfield">
+                        <option value=""> </option>
+                    </select>
+                </td>
+                <td class="fieldtitle">显示查询条件：</td>
+                <td class="fieldinput"><input type="checkbox" name="showQueryCondition" checked></td>
+            </tr>
+            <tr><td style="height: 2px;"></td> </tr>
+            <tr>
+                <td class="fieldtitle">表之间关系SQL：</td>
+                <td class="fieldinput" colspan="5">
+                    <textarea cols="100" rows="4" name="relationSql"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
     <div class="ffoot" style="float: none;text-align: center">
         <a href="javascript:void(0)" id="submitBtn" class="easyui-linkbutton" iconCls="icon-ok" onclick="$('#saveForm').submit()">提 交</a>&nbsp;&nbsp;
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" onclick="history.back()">返 回</a>
     </div>
-    </form>
-</div>
+</form>
+
 </body>
 </html>

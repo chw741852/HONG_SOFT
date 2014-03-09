@@ -34,6 +34,11 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    
+    <!-- web 服务监听器 -->
+    <listener>
+        <listener-class>com.hong.core.listener.ServletContextLoaderListener</listener-class>
+    </listener>
 
     <!-- 配置spring mvc -->
     <servlet>

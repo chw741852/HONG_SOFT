@@ -2,7 +2,7 @@ package com.hong.manager.sys.module.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.hong.manager.sys.base.controller.impl.BaseControllerImpl;
+import com.hong.core.generic.controller.impl.BaseControllerImpl;
 import com.hong.manager.sys.module.domain.SysModule;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,7 +57,7 @@ public class SysModuleController extends BaseControllerImpl {
         genericService.saveObject(sysModule);
 
         String json = JSON.toJSONString(sysModule);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/manager/sys/module/view")
@@ -98,7 +98,7 @@ public class SysModuleController extends BaseControllerImpl {
         }
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/manager/sys/module/ajaxFindModule")
@@ -116,7 +116,7 @@ public class SysModuleController extends BaseControllerImpl {
         }
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/manager/sys/module/loadChildNode")
@@ -143,7 +143,7 @@ public class SysModuleController extends BaseControllerImpl {
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/manager/sys/module/ajaxView")
@@ -161,7 +161,7 @@ public class SysModuleController extends BaseControllerImpl {
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping("/manager/sys/module/edit")
@@ -175,7 +175,7 @@ public class SysModuleController extends BaseControllerImpl {
         }
 
         String json = JSON.toJSONString(sysModule);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/manager/sys/module/delete")

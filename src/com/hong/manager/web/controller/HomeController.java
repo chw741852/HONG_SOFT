@@ -25,13 +25,13 @@ public class HomeController {
     @Autowired
     private IGenericService genericService;
 
-    @RequestMapping(value = "/manager/home", method = RequestMethod.GET)
+    @RequestMapping(value = "/manager/home")
     public String home() {
         return "/manager/home";
     }
 
     @RequestMapping(value = "/manager/home/loadZTreeNodes", method = RequestMethod.GET)
-    public void loadZTreeNodes(HttpServletRequest request, HttpServletResponse response) {
+    public void loadZTreeNodes(HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
 
         String sql = "select id, isnull(parentId,0) pId, name, actionUrl action" +

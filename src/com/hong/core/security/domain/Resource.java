@@ -5,6 +5,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -27,6 +28,15 @@ public class Resource extends IdEntity {
     private String url;
     private Integer sequence;   // 排序
     private Boolean enabled;
+
+    @Transient
+    private Long parentId;
+
+    @ManyToOne(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "parentId")
+    private Resource parent;
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.REFRESH}, fetch = FetchType.EAGER, mappedBy = "parent")
+    private Set<Resource> children = new HashSet<Resource>();
 
     @ManyToMany(mappedBy = "resources", targetEntity = Authority.class, fetch = FetchType.EAGER)
     private Set<Authority> authorities = new TreeSet<Authority>();
@@ -69,6 +79,30 @@ public class Resource extends IdEntity {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public Resource getParent() {
+        return parent;
+    }
+
+    public void setParent(Resource parent) {
+        this.parent = parent;
+    }
+
+    public Set<Resource> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<Resource> children) {
+        this.children = children;
     }
 
     public Set<Authority> getAuthorities() {

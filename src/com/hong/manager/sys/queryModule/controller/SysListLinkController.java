@@ -1,7 +1,7 @@
 package com.hong.manager.sys.queryModule.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.hong.manager.sys.base.controller.impl.BaseControllerImpl;
+import com.hong.core.generic.controller.impl.BaseControllerImpl;
 import com.hong.manager.sys.dictionary.domain.SysCode;
 import com.hong.manager.sys.queryModule.domain.SysListLink;
 import com.hong.manager.sys.queryModule.domain.SysQueryModule;
@@ -47,7 +47,7 @@ public class SysListLinkController extends BaseControllerImpl {
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping("/saveOrUpdate")
@@ -72,7 +72,7 @@ public class SysListLinkController extends BaseControllerImpl {
         }
 
         String json = JSON.toJSONString(map);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping("/edit")
@@ -81,7 +81,7 @@ public class SysListLinkController extends BaseControllerImpl {
 
         SysListLink sysListLink = (SysListLink)genericService.lookUp(SysListLink.class, id);
         String json = JSON.toJSONString(sysListLink);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping("/delete")
@@ -95,6 +95,6 @@ public class SysListLinkController extends BaseControllerImpl {
         }
 
         String json = JSON.toJSONString(map);
-        printJson(response, json);
+        printJson(json, response);
     }
 }

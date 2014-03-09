@@ -19,12 +19,18 @@ public class IdEntity implements Serializable {
     private Long id;
     @Version
     private Long version;
-    private Date createdTime;
+    @Column(length = 50)
+    private String createdDate;
+    @Column(length = 50)
+    private String createdTime;
     @Column(length = 50)
     private String createdBy;
     private Long createdById;
 
-    private Date modifiedTime;
+    @Column(length = 50)
+    private String modifiedDate;
+    @Column(length = 50)
+    private String modifiedTime;
     @Column(length = 50)
     private String modifiedBy;
     private Long modifiedById;
@@ -49,14 +55,6 @@ public class IdEntity implements Serializable {
         this.version = version;
     }
 
-    public Date getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
-    }
-
     public String getCreatedBy() {
         return createdBy;
     }
@@ -71,14 +69,6 @@ public class IdEntity implements Serializable {
 
     public void setCreatedById(Long createdById) {
         this.createdById = createdById;
-    }
-
-    public Date getModifiedTime() {
-        return modifiedTime;
-    }
-
-    public void setModifiedTime(Date modifiedTime) {
-        this.modifiedTime = modifiedTime;
     }
 
     public String getModifiedBy() {
@@ -111,5 +101,37 @@ public class IdEntity implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getModifiedTime() {
+        return modifiedTime;
+    }
+
+    public void setModifiedTime(String modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
+
+    public String getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(String modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
+
+    public String getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(String createdTime) {
+        this.createdTime = createdTime;
     }
 }

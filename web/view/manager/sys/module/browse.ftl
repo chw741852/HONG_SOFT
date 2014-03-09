@@ -93,7 +93,7 @@
     <div style="width: 100%; margin: 4px 4px;">
         <table class="easyui-datagrid" title="子节点列表" style="margin: 2px auto;" id="dg"
                data-options="singleSelect:true, fitColumns:true, rownumbers:true,
-                toolbar: '#tb', onLoadSuccess:easyuiInstance.onLoadSuccess,
+                onLoadSuccess:easyuiInstance.onLoadSuccess,
                 url:'${rc.contextPath}/manager/sys/module/loadChildNode', method:'get'">
             <thead>
             <th data-options="field:'sequence', width:$(this).width()*0.2, editor: 'text'">序 号</th>

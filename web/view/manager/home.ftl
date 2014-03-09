@@ -32,6 +32,7 @@
         <div style="margin: auto;"><h1 STYLE="COLOR: #FFFFCC"> </h1></div>
     </div>-->
     <div style="float: right; margin: 13px 20px;">
+        皮肤管理
         <select id="theme" onchange="scriptInstance.changeTheme()">
             <option value="default">default</option>
             <option value="metro-gray">metro-gray</option>

@@ -66,3 +66,9 @@
 .icon-excel{
     background:url('icons/excel.png') no-repeat center center;
 }
+.icon-copy{
+    background:url('icons/copy.png') no-repeat center center;
+}
+.icon-attach{
+    background:url('icons/attach.png') no-repeat center center;
+}

@@ -44,7 +44,9 @@ PublicListInfoScript.prototype = {
     datagridOnLoadSuccess:function(data) {
         var strs = hideFieldStr.split(",");
         $.each(strs, function(i, s) {
-            $("#dg").datagrid("hideColumn", s);
+            if (s != null && s != "") {
+                $("#dg").datagrid("hideColumn", s);
+            }
         });
     },
     btnClick:function() {
@@ -53,18 +55,27 @@ PublicListInfoScript.prototype = {
         var verify = $(this).attr("verify");
         var linkType = $(this).attr("linkType");
         var rows = $("#dg").datagrid("getChecked");
-        if (linkType != "1") {
-            if (rows.length <= 0) {
-                scriptTools.showMsg("请选择一条记录","");
-                return false;
-            }
+        if (opType == "0") {
+            location.href = contextPath + url;
+            return true;
+        }
+        if (rows.length <= 0) {
+            scriptTools.showMsg("请选择一条记录","");
+            return false;
         }
         if (opType == "1") {
             if (rows.length > 1) {
                 scriptTools.showMsg("只能操作单条记录", "");
                 return false;
+            }
+            if (linkType == "3") {
+                if (window.confirm("确定删除选中记录？")) {
+                    location.href = contextPath + url + "?id=" + rows[0].id;
+                    return true;
+                }
             } else {
                 location.href = contextPath + url + "?id=" + rows[0].id;
+                return true;
             }
         } else {
             var ids = "";
@@ -72,7 +83,12 @@ PublicListInfoScript.prototype = {
                 ids = ids + row.id + ",";
             });
             ids = ids.substring(0, ids.length - 1);
-            location.href = contextPath + url + "?ids=" + ids;
+            if (linkType == "3") {
+                if (window.confirm("确定删除选中记录？")) {
+                    location.href = contextPath + url + "?ids=" + ids;
+                    return true;
+                }
+            }
         }
     },
     datagridOnDblClickRow:function(index, data) {

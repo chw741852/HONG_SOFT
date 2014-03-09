@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hong on 14-2-20 上午11:35.
@@ -70,6 +71,10 @@ public class PublicSearchControllerHelper {
                 }
                 i++;
             }
+        }
+        int index = (i-1) % 3;
+        if (index != 0) {
+            html.append("<td colspan='" + (index * 2) + "'></td>");
         }
         html.append("</tr></table>");
         mv.addObject("queryHtml", html.toString());
@@ -149,6 +154,10 @@ public class PublicSearchControllerHelper {
                     html.append("data-options=\"iconCls:'icon-undo',plain:true\"");
                 } else if (link.getLinkType().equals("9")) {    // 反审核
                     html.append("data-options=\"iconCls:'icon-reload',plain:true\"");
+                } else if (link.getLinkType().equals("10")) {   // 复制
+                    html.append("data-options=\"iconCls:'icon-copy',plain:true\"");
+                } else if (link.getLinkType().equals("11")) {
+                    html.append("data-options=\"iconCls:'icon-attach',plain:true\"");
                 }
                 html.append(">" + link.getName() + "</a>");
             }
@@ -178,7 +187,24 @@ public class PublicSearchControllerHelper {
             } else {
                 tableName = sysField.getTableName();
             }
-            sql.append(tableName + "." + sysField.getFieldName() + " " + sysField.getFieldAliasName() + ",");
+            if ("1".equals(sysField.getDataSourceType())) {
+                List<String[]> dataSource = genericService.executeSql(sysField.getDataSourceSql());
+                if (dataSource != null && dataSource.size() > 0) {
+                    sql.append(" case " + tableName + "." + sysField.getFieldName());
+                    for (String[] data:dataSource) {
+                        sql.append(" when '" + data[0] + "' then '" + data[1] + "'");
+                    }
+                    if (sysField.getFieldAliasName() != null && !sysField.getFieldAliasName().trim().equals("")) {
+                        sql.append(" end " + sysField.getFieldAliasName() + ",");
+                    } else {
+                        sql.append(" end " + sysField.getFieldName() + ",");
+                    }
+                } else {
+                    sql.append(tableName + "." + sysField.getFieldName() + " " + sysField.getFieldAliasName() + ",");
+                }
+            } else {
+                sql.append(tableName + "." + sysField.getFieldName() + " " + sysField.getFieldAliasName() + ",");
+            }
 
             /* ********************************** 处理查询条件 **************************************** */
             if (sysField.getQueryCondition() == true) { // 是查询字段

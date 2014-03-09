@@ -1,7 +1,7 @@
 package com.hong.manager.sys.queryModule.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.hong.manager.sys.base.controller.impl.BaseControllerImpl;
+import com.hong.core.generic.controller.impl.BaseControllerImpl;
 import com.hong.manager.sys.dictionary.domain.SysCode;
 import com.hong.manager.sys.queryModule.domain.SysField;
 import com.hong.manager.sys.queryModule.domain.SysQueryModule;
@@ -22,7 +22,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/manager/sys/field")
-public class SysFieldController extends BaseControllerImpl{
+public class SysFieldController extends BaseControllerImpl {
     private final String BASEPATH = "/manager/sys/queryModule";
 
     @RequestMapping("/browse")
@@ -59,7 +59,7 @@ public class SysFieldController extends BaseControllerImpl{
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping("/saveOrUpdate")
@@ -88,7 +88,7 @@ public class SysFieldController extends BaseControllerImpl{
         }
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping("/edit")
@@ -97,7 +97,7 @@ public class SysFieldController extends BaseControllerImpl{
 
         SysField sysField = (SysField)genericService.lookUp(SysField.class, id);
         String json = JSON.toJSONString(sysField);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping("/delete")
@@ -111,7 +111,7 @@ public class SysFieldController extends BaseControllerImpl{
         }
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping("/checkTableName")
@@ -125,7 +125,7 @@ public class SysFieldController extends BaseControllerImpl{
         }
 
         String json = JSON.toJSONString(map);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping("/loadFieldName")
@@ -143,6 +143,6 @@ public class SysFieldController extends BaseControllerImpl{
         }
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 }

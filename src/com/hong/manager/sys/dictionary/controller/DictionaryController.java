@@ -2,7 +2,7 @@ package com.hong.manager.sys.dictionary.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.hong.manager.sys.base.controller.impl.BaseControllerImpl;
+import com.hong.core.generic.controller.impl.BaseControllerImpl;
 import com.hong.manager.sys.dictionary.domain.SysCode;
 import com.hong.manager.sys.dictionary.domain.SysDictionary;
 import org.springframework.stereotype.Controller;
@@ -53,7 +53,7 @@ public class DictionaryController extends BaseControllerImpl {
         }
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/saveOrUpdate")
@@ -86,7 +86,7 @@ public class DictionaryController extends BaseControllerImpl {
         }
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/ajaxView")
@@ -100,7 +100,7 @@ public class DictionaryController extends BaseControllerImpl {
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/loadCodeRow")
@@ -112,7 +112,7 @@ public class DictionaryController extends BaseControllerImpl {
         List<Map> result = genericService.executeSqlToRecordMap(sql);
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/loadChildRow")
@@ -134,7 +134,7 @@ public class DictionaryController extends BaseControllerImpl {
         }
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/checkKey")
@@ -157,7 +157,7 @@ public class DictionaryController extends BaseControllerImpl {
         }
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/edit")
@@ -171,7 +171,7 @@ public class DictionaryController extends BaseControllerImpl {
         }
 
         String json = JSON.toJSONString(dictionary);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/delete")
@@ -216,7 +216,7 @@ public class DictionaryController extends BaseControllerImpl {
         List<Map> result = genericService.executeSqlToRecordMap(sql.toString());
         String json = JSON.toJSONString(result);
 
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/saveOrUpdateCode")
@@ -248,7 +248,7 @@ public class DictionaryController extends BaseControllerImpl {
         result.put("code", sysCode);
 
         String json = JSON.toJSONString(result);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping(value = "/deleteCode")
@@ -291,6 +291,6 @@ public class DictionaryController extends BaseControllerImpl {
         }
 
         String json = JSON.toJSONString(map);
-        printJson(response, json);
+        printJson(json, response);
     }
 }

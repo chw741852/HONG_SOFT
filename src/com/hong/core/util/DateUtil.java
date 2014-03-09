@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class DateUtil {
     /**
-     * 获取日期
+     * 获取当前日期 yyyy-MM-dd
      * @return 日期
      */
     public static String getDate() {
@@ -17,7 +17,16 @@ public class DateUtil {
     }
 
     /**
-     * 获取日期时间
+     * 获取当前时间 HH:mm:ss
+     * @return
+     */
+    public static String getTime() {
+        SimpleDateFormat fmt = new SimpleDateFormat("HH:mm:ss");
+        return fmt.format(new Date());
+    }
+
+    /**
+     * 获取日期时间 yyyy-MM-dd HH:mm:ss
      * @return 日期时间
      */
     public static String getDateTime() {
@@ -41,7 +50,7 @@ public class DateUtil {
      * @param date  日期
      * @return  日期
      */
-    public static String getDate(String format, Date date) {
+    public static String formatDate(String format, Date date) {
         SimpleDateFormat fmt = new SimpleDateFormat(format);
         return fmt.format(date);
     }

@@ -1,13 +1,17 @@
 package com.hong.test.junit;
 
 import com.hong.core.generic.service.IGenericService;
+import com.hong.core.security.domain.Authority;
+import com.hong.core.security.domain.Resource;
 import com.hong.core.security.domain.Role;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,8 +30,8 @@ import javax.annotation.Resource;
  * 需要将spring-base.xml中的propertyConfig路径改为‘file:web/..’形式才可以运行
  */
 public class GenericServiceTest {
-    @Resource(name = "genericService")
-    private IGenericService publicService;
+    @Autowired
+    private IGenericService genericService;
 
     @Test
     public void testSave() {
@@ -35,6 +39,18 @@ public class GenericServiceTest {
         role.setEnabled(true);
         role.setName("ROLE_USER");
         role.setSequence(1);
-        publicService.saveObject(role);
+        genericService.saveObject(role);
+    }
+
+    @Test
+    public void testAuthorityResource() {
+        Authority authority = (Authority) genericService.lookUp(Authority.class, 1);
+        Resource resource = (Resource)genericService.lookUp(Resource.class, 1);
+
+        Set<Resource> resources = new TreeSet<Resource>();
+        resources.add(resource);
+
+        authority.setResources(resources);
+        genericService.updateObject(authority);
     }
 }

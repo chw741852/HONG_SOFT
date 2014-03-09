@@ -113,6 +113,8 @@
                         <option value="7">审核</option>
                         <option value="8">弃交</option>
                         <option value="9">反审核</option>
+                        <option value="10">复制</option>
+                        <option value="11">附属</option>
                     </select>
                 </td>
             </tr>
@@ -128,6 +130,7 @@
                 <td class="fieldtitle">选择记录状态：</td>
                 <td class="fieldinput">
                     <select name="opType" class="selectfield">
+                        <option value="0"> </option>
                         <option value="1">操作单条记录</option>
                         <option value="2">操作多条记录</option>
                     </select>

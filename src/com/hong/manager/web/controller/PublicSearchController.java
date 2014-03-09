@@ -1,8 +1,8 @@
 package com.hong.manager.web.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.hong.manager.sys.base.controller.impl.BaseControllerImpl;
-import com.hong.manager.sys.queryModule.domain.SysField;
+import com.hong.core.generic.controller.impl.BaseControllerImpl;
+import com.hong.core.util.Tools;
 import com.hong.manager.sys.queryModule.domain.SysQueryModule;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +68,7 @@ public class PublicSearchController extends BaseControllerImpl {
         map.put("total", count);
 
         String json = JSON.toJSONString(map);
-        printJson(response, json);
+        printJson(json, response);
     }
 
     @RequestMapping("/printListInfo")

@@ -1,12 +1,11 @@
-package com.hong.manager.sys.base.controller.impl;
+package com.hong.core.generic.controller.impl;
 
 import com.hong.core.generic.service.IGenericService;
-import com.hong.manager.sys.base.controller.BaseController;
+import com.hong.core.generic.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
@@ -20,7 +19,7 @@ public class BaseControllerImpl implements BaseController {
     protected IGenericService genericService;
 
     @Override
-    public void printJson(HttpServletResponse response, String json) {
+    public void printJson(String json, HttpServletResponse response) {
         try {
             response.getWriter().write(json);
             response.getWriter().flush();
