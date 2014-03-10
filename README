@@ -1,5 +1,13 @@
 This file was created by IntelliJ IDEA 12.1.6 for binding GitHub repository
-开发环境：JDK1.7，TOMCAT7，SQL SERVER 2005
+开发环境：JDK1.7，TOMCAT7，SQL SERVER 2012，windows7/8 64位
 
-现在他只是一个用springMVC + spring3.x + JPA + hibernate4.x搭建的一个框架，页面是用freemarker做的。
+现在他只是一个用springMVC + spring3.2.x + JPA + hibernate4.2.x搭建的一个框架，页面是用freemarker做的。
 运行之后你可以看见一个用easyui做的界面，并且有一个例子。
+
+添加了权限管理，权限使用spring security 3.1做的
+
+core包里面放的是：通用的工具类、异常处理、监听器、过滤器，dao、service、安全管理等。
+manager包里面是：后台管理的一些东西，模块配置、查询生成器配置等。
+界面还需要美化、有些地方还不是很人性化，特别是查询生成器一块。
+
+我打算是做一个用户可以自定义创建类、字段...的一个项目，所以待续...
