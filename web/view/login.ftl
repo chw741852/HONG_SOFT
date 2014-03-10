@@ -21,7 +21,9 @@
         }
 
         function checkSubmit() {
+            var flag = false;
             $.ajax({
+                async: false,
                 type: "get",
                 url: "${rc.contextPath}/anonymous/checkCaptcha",
                 data: "captcha=" + $("#kaptcha").val(),
@@ -29,24 +31,18 @@
                     if (result == "false") {
                         $("#errorMsg").html("验证码错误");
                         $("#kaptchaImage").hide().attr('src', '${rc.contextPath}/anonymous/kaptchaImg?' + Math.floor(Math.random()*100)).fadeIn();
+                        flag = false;
                     } else {
-                        $("#f").submit();
+                        flag = true;
                     }
                 }
             });
+
+            return flag;
         }
     </script>
 </head>
 <body>
-<#--<div class="center">-->
-    <#--<form action="${rc.contextPath}/j_spring_security_check" method="post">-->
-        <#--<label for="username">用户名：</label>-->
-        <#--<input id="username" name="username"/><br/>-->
-        <#--<label for="password">密 码：</label>-->
-        <#--<input type="password" id="password" name="password"/><br/>-->
-        <#--<input type="submit" value="登录"/>-->
-    <#--</form>-->
-<#--</div>-->
 
 <div class="login_wrap">
     <div class="logo clearfix">
@@ -54,7 +50,7 @@
         <#--<strong class="fr sys">CRM管理系统</strong>-->
     </div>
     <div class="login_content">
-        <form action="${rc.contextPath}/j_spring_security_check" method="post" id="f" focus="username">
+        <form action="${rc.contextPath}/j_spring_security_check" method="post" onsubmit="return checkSubmit()" id="f" focus="username">
             <ul class="form_ul">
                 <li class="clearfix">
                     <input type="hidden" name="cardNumber" id="cardNumber" />
@@ -75,9 +71,11 @@
                     <a href="#" onClick="changeCode()" id="myReloadHref" class="change_code fl">看不清<span class="high_light">换一张</span></a>
                 </li>
                 <li class="clearfix pt15">
-                    <input type="button" value="登录" onclick="checkSubmit()" class="btn debte_png fl mr35"/>
+                    <input type="submit" value="登录" class="btn debte_png fl mr35"/>
                 </li>
-                <li><span id="errorMsg" style="color: #ff0000"></span></li>
+                <li><span id="errorMsg" style="color: #ff0000">
+                    ${message!}
+                </span></li>
             </ul>
         </form>
         <div class="top_border debte_png"></div>

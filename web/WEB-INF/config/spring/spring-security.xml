@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns="http://www.springframework.org/schema/security"
-            xsi:schemaLocation="http://www.springframework.org/schema/beans
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://www.springframework.org/schema/security"
+             xmlns:security="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security.xsd">
@@ -18,16 +19,17 @@
         <intercept-url pattern="/anonymous/*" access="permitAll"/>
         <intercept-url pattern="/**" access="fullyAuthenticated"/>
         <form-login login-page="/login" username-parameter="username" password-parameter="password"
-                    authentication-failure-url="/login?error" default-target-url="/home"/>
+                    authentication-failure-url="/login?error=true" default-target-url="/home" />
         <logout logout-url="/logout" logout-success-url="/login?logout"/>
 
         <!-- 当一个账号重复登录时，则第一个登录的用户session过期，跳转的登录页面 -->
-        <session-management invalid-session-url="/sessionTimeout">
-            <concurrency-control max-sessions="1" expired-url="/login?expired"/>
+        <!--<session-management invalid-session-url="/anonymous/sessionTimeout">-->
+        <session-management>
+            <concurrency-control max-sessions="1" expired-url="/login?expired=true"/>
         </session-management>
 
         <!-- 当用户权限不够时，跳转到指定URL -->
-        <access-denied-handler error-page="/accessDenied"/>
+        <access-denied-handler error-page="/error/accessDenied"/>
 
         <custom-filter ref="filterSupport" before="FILTER_SECURITY_INTERCEPTOR"/>
     </http>
@@ -44,10 +46,14 @@
 
     <!-- 验证配置，认真管理器，实现用户认证入口，主要实现UserDetailsService接口即可 -->
     <authentication-manager alias="authenticationManagerSupport">
-        <authentication-provider user-service-ref="userDetailsService">
-            <password-encoder ref="passwordEncoding"/>
+        <authentication-provider ref="authenticationProvider">
         </authentication-provider>
     </authentication-manager>
+    <beans:bean id="authenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <beans:property name="userDetailsService" ref="userDetailsService"/>
+        <beans:property name="hideUserNotFoundExceptions" value="false"/>
+        <beans:property name="passwordEncoder" ref="passwordEncoding"/>
+    </beans:bean>
     <beans:bean id="passwordEncoding"
                 class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
 
@@ -62,5 +68,9 @@
     <!-- 资源元数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色访问 -->
     <beans:bean id="securityMetadataSourceSupport" class="com.hong.core.security.support.InvocationSecurityMetadataSourceSupport">
         <beans:constructor-arg ref="genericService"/>
+    </beans:bean>
+
+    <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <beans:property name="basename" value="classpath:org/springframework/security/messages_zh_CN"/>
     </beans:bean>
 </beans:beans>

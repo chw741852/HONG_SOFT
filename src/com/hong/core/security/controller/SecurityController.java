@@ -4,6 +4,7 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.hong.core.generic.controller.impl.BaseControllerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,21 @@ public class SecurityController extends BaseControllerImpl {
     private Producer captchaProducer;
 
     @RequestMapping("/login")
-    public String login() {
+    public String login(HttpServletRequest request, String error, String expired) {
+        String message = "";
+        if (error != null && error.equals("true")) {
+            Exception e = (Exception)request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
+            if (e != null) {
+                if (e instanceof BadCredentialsException) {
+                    message = "密码错误";
+                } else {
+                    message = e.getMessage();
+                }
+            }
+        } else if (expired != null && expired.equals("true")) {
+            message = "登录失效";
+        }
+        request.setAttribute("message", message);
         return "/login";
     }
 
@@ -39,7 +54,7 @@ public class SecurityController extends BaseControllerImpl {
         Object o = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (o instanceof UserDetails) {
-            request.getSession().setAttribute("User", o);
+            request.getSession().setAttribute("USER", o);
         }
 
         return "redirect:/manager/home";
@@ -50,7 +65,7 @@ public class SecurityController extends BaseControllerImpl {
         return "/error/accessDenied";
     }
 
-    @RequestMapping("/sessionTimeout")
+    @RequestMapping("/anonymous/sessionTimeout")
     public String sessionTimeout() {
         return "/error/sessionTimeout";
     }

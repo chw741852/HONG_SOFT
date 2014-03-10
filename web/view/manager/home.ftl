@@ -31,6 +31,9 @@
             background-repeat: repeat; background-position: left; text-align: right;">
         <div style="margin: auto;"><h1 STYLE="COLOR: #FFFFCC"> </h1></div>
     </div>-->
+    <div style="float: left; margin: 13px 20px;">
+        欢迎 ${(Session["USER"].name)!} 回来！<a href="${rc.contextPath}/logout">退出</a>
+    </div>
     <div style="float: right; margin: 13px 20px;">
         皮肤管理
         <select id="theme" onchange="scriptInstance.changeTheme()">

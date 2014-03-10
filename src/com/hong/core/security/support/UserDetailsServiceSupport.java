@@ -31,15 +31,14 @@ public class UserDetailsServiceSupport implements UserDetailsService, ISecurityM
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         String hql = "from " + User.class.getName() + " a where a.username='" + s + "'";
-        System.out.println("UserDetails: " + hql);
+//        System.out.println("UserDetails: " + hql);
         List userList = genericService.executeObjectSql(hql);
         if (userList != null && userList.size() > 0) {
             User user = (User)userList.get(0);
-            return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                    user.getPassword(), true, true, true, true, user.getAuthorities());
+            return user;
         }
 
-        throw new UsernameNotFoundException(s);
+        throw new UsernameNotFoundException("账号不存在");
     }
 
     @Override
