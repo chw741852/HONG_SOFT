@@ -119,7 +119,9 @@ public class UserController extends BaseControllerImpl {
         if (!oldUser.getPassword().equals(user.getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
-
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
         if (genericService.updateObject(user) != null) {
             mv.addObject("message", "用户 " + user.getUsername() + " 修改成功");
         } else {
